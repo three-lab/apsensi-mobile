@@ -88,7 +88,7 @@
         android:width="306dp"
         android:background="@drawable/button_shape"
         android:text="Login"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
     <ImageView

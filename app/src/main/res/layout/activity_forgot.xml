@@ -52,7 +52,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/button_shape2"
-        android:backgroundTint="@color/backgroundInt"
         android:hint="Enter your email"
         android:drawablePadding="20dp"
         android:paddingLeft="20dp" />
@@ -64,7 +63,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="420dp"
         android:width="306dp"
-        android:background="@drawable/button_shape2"
+        android:backgroundTint="@color/primaryColor"
+        android:background="@drawable/button_shape"
         android:text="Lanjut"
         android:textColor="@color/white"
         android:textSize="18sp" />
