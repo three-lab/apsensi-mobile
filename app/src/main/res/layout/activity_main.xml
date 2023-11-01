@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:backgroundTint="@color/background">
-    >
 
     <ImageView
         android:layout_width="wrap_content"
@@ -24,8 +23,8 @@
         android:layout_below="@+id/img1"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="117dp"
-        android:layout_marginRight="69dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="48dp"
         android:src="@drawable/gambar2" />
 
     <ImageView
@@ -69,6 +68,7 @@
             android:id="@+id/edit_password"/>
 
         <TextView
+            android:id="@+id/btnlupapass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edit_password"
@@ -92,13 +92,15 @@
         android:textSize="18sp" />
 
     <ImageView
-        android:layout_width="123dp"
-        android:layout_height="118dp"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="303dp"
-        android:layout_marginBottom="-18dp"
+        android:layout_marginLeft="276dp"
+        android:layout_marginBottom="0dp"
         android:src="@drawable/gambar4" />
+
+
 
 
 </RelativeLayout>
