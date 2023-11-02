@@ -1,6 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="Lainnya"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="60dp"
+        android:src="@drawable/button_shape3"
+        android:layout_marginStart="299dp"
+        android:layout_marginTop="40dp"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="311dp"
+            android:src="@drawable/user"
+            android:layout_marginTop="50dp"/>
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="360dp"
+            android:src="@drawable/bell"
+            android:layout_marginTop="50dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/foto_profil"/>
+            <TextView
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/black"
+                android:text="AHMAD IRSYADUL IBAD"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:paddingTop="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="-250dp"
+            android:layout_marginRight="70dp"
+            android:textColor="@color/black"
+            android:text="ahmadirsyadulibad7@gmail.com"/>
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/icon_right"
+            android:layout_marginLeft="-50dp"
+            android:layout_marginTop="18dp"/>
+
+    </LinearLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:rowCount="3"
+        android:columnCount="2"
+        android:id="@+id/verifikasi">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/centang"/>
+                <TextView
+                    android:layout_width="290dp"
+                    android:layout_height="35dp"
+                    android:textColor="@color/black"
+                    android:text="Verifikasi Email-mu"
+                    android:textSize="23dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="290dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="-291dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="italic"
+                    android:text="Tingkatkan keamanan data"/>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="360dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="-370dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/centang"/>
+                <TextView
+                    android:layout_width="290dp"
+                    android:layout_height="35dp"
+                    android:textColor="@color/black"
+                    android:text="Daftarkan Wajah"
+                    android:textSize="23dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:layout_width="290dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="-291dp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="italic"
+                    android:text="Daftarkan wajah untuk absensimu"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="410dp"
+        android:rowCount="3"
+        android:columnCount="2"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+        
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+            
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/lock2" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="7dp"
+                android:text="Ganti Password"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:padding="3dp"/>
+            
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="370dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginStart="-370dp">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/log_out"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginStart="55dp"
+                android:layout_marginTop="7dp"
+                android:text="Keluar Akun"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+                android:padding="3dp"/>
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+
+</RelativeLayout>
