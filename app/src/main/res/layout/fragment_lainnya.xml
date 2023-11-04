@@ -23,14 +23,14 @@
         android:layout_marginStart="299dp"
         android:layout_marginTop="40dp"/>
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="311dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="315dp"
             android:src="@drawable/user"
             android:layout_marginTop="50dp"/>
         <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_marginStart="360dp"
             android:src="@drawable/bell"
             android:layout_marginTop="50dp"/>
