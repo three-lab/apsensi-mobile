@@ -7,101 +7,101 @@
     android:id="@+id/beranda">
 
     <ImageView
-        android:layout_width="240dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="140dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/logo"/>
     <ImageView
-        android:layout_width="260dp"
-        android:layout_height="80dp"
-        android:layout_marginStart="600dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="310dp"
+        android:layout_marginTop="50dp"
         android:src="@drawable/button_shape3"
         android:background="@color/buttonGrey"/>
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="635dp"
-        android:layout_marginTop="75dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="330dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/user" />
     <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="715dp"
-        android:layout_marginTop="75dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="365dp"
+        android:layout_marginTop="60dp"
         android:src="@drawable/bell" />
 
     <TextView
-        android:layout_width="390dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="155dp"
-        android:layout_marginStart="40dp"
+        android:layout_width="290dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="105dp"
+        android:layout_marginStart="20dp"
         android:text="Selamat Pagi..."
-        android:textSize="28dp"
+        android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:padding="3dp"/>
 
     <TextView
         android:id="@+id/data"
-        android:layout_width="740dp"
-        android:layout_height="240dp"
+        android:layout_width="540dp"
+        android:layout_height="140dp"
         android:background="@drawable/button_shape"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginTop="250dp"/>
+        android:layout_marginTop="150dp"/>
     <ImageView
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="605dp"
-        android:layout_marginTop="205dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="285dp"
+        android:layout_marginTop="125dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/gambar5"/>
     <TextView
-        android:layout_width="450dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="270dp"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="170dp"
         android:layout_marginStart="50dp"
         android:text="35704570067"
-        android:textSize="35dp"
+        android:textSize="18dp"
         android:textColor="@color/white"
         android:padding="2dp"/>
     <TextView
-        android:layout_width="650dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="340dp"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="200dp"
         android:layout_marginStart="50dp"
         android:text="Ahmad Irsyadul Ibad"
         android:textStyle="bold"
-        android:textSize="45dp"
+        android:textSize="20dp"
         android:textColor="@color/white"
         android:padding="2dp"/>
     <TextView
-        android:layout_width="450dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="410dp"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="240dp"
         android:layout_marginStart="50dp"
         android:text="Semester Ganjil 2023"
         android:textColor="@color/white"
         android:textStyle="italic"
-        android:textSize="35dp"
+        android:textSize="18dp"
         android:padding="2dp"/>
 
     <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="590dp"
+        android:layout_height="390dp"
         android:rowCount="3"
         android:columnCount="2"
         android:layout_marginTop="40dp"
-        android:layout_marginLeft="74dp"
-        android:layout_marginRight="74dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
         android:layout_below="@+id/data">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="285dp"
-            android:layout_height="250dp"
+            android:layout_width="140dp"
+            android:layout_height="115dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp">
             <LinearLayout
@@ -110,8 +110,8 @@
                 android:background="@color/primaryColor"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/calendar"
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp"/>
@@ -119,29 +119,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Calendar"
-                    android:textSize="33dp"
-                    android:layout_marginTop="20dp"
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="285dp"
-            android:layout_height="250dp"
-            android:layout_marginStart="70dp"
+            android:layout_width="135dp"
+            android:layout_height="115dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             android:layout_columnWeight="1"
-            android:layout_column="1">
+            android:layout_column="1"
+            android:layout_marginLeft="70dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/primaryColor"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/laporan"
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp"/>
@@ -149,16 +149,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Laporan Presensi"
-                    android:textSize="33dp"
-                    android:layout_marginTop="20dp"
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="285dp"
-            android:layout_height="250dp"
+            android:layout_width="145dp"
+            android:layout_height="115dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             android:layout_marginTop="70dp">
@@ -168,8 +168,8 @@
                 android:background="@color/primaryColor"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:src="@drawable/ijin"
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp"/>
@@ -177,16 +177,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Izin"
-                    android:textSize="33dp"
-                    android:layout_marginTop="20dp"
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="285dp"
-            android:layout_height="250dp"
+            android:layout_width="115dp"
+            android:layout_height="115dp"
             android:layout_marginStart="70dp"
             android:layout_marginTop="70dp"
             app:cardCornerRadius="10dp"
@@ -200,8 +200,8 @@
                 android:background="@color/primaryColor"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/faq"
                     android:layout_gravity="center"
                     android:layout_marginTop="25dp"/>
@@ -209,8 +209,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bantuan"
-                    android:textSize="33dp"
-                    android:layout_marginTop="20dp"
+                    android:textSize="18dp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/white"
                     android:layout_gravity="center_horizontal"/>
             </LinearLayout>
