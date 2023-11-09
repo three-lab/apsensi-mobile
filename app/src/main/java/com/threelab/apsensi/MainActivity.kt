@@ -1,18 +1,19 @@
 package com.threelab.apsensi
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-
 import org.json.JSONObject
 
-class MainActivity : AppCompatActivity() {
+
+class  MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         loginBtn.setOnClickListener {view ->
             login(username.text.toString(), password.text.toString())
             Log.d("Button", "Button Clicked")
+
+            val sharedPreferences = getSharedPreferences("token", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
         }
     }
 
@@ -56,5 +60,6 @@ class MainActivity : AppCompatActivity() {
             });
 
         requestQueue.add(loginRequest)
+
     }
 }

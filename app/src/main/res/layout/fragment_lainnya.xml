@@ -92,65 +92,69 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:background="@drawable/button_shape2"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_margin="8dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="12dp"
                     android:src="@drawable/centang"/>
                 <TextView
                     android:layout_width="290dp"
                     android:layout_height="35dp"
                     android:textColor="@color/black"
                     android:text="Verifikasi Email-mu"
-                    android:textSize="23dp"
+                    android:paddingTop="8dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"/>
                 <TextView
-                    android:layout_width="290dp"
-                    android:layout_height="25dp"
+                    android:layout_width="300dp"
+                    android:layout_height="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="-291dp"
                     android:layout_marginRight="20dp"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
+                    android:textSize="11sp"
                     android:textStyle="italic"
-                    android:text="Tingkatkan keamanan data"/>
+                    android:text="Tingkatkan keamanan dengan verifikasi alamat email"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="360dp"
+            android:layout_width="370dp"
             android:layout_height="60dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="58dp"
             android:layout_marginLeft="-370dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
+                android:background="@drawable/button_shape2"
                 android:orientation="horizontal">
                 <ImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_margin="8dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_margin="12dp"
                     android:src="@drawable/centang"/>
                 <TextView
                     android:layout_width="290dp"
                     android:layout_height="35dp"
                     android:textColor="@color/black"
                     android:text="Daftarkan Wajah"
-                    android:textSize="23dp"
+                    android:textSize="18dp"
+                    android:paddingTop="8dp"
                     android:textStyle="bold"/>
                 <TextView
-                    android:layout_width="290dp"
-                    android:layout_height="25dp"
+                    android:layout_width="300dp"
+                    android:layout_height="20dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="-291dp"
                     android:layout_marginRight="20dp"
                     android:textColor="@color/black"
-                    android:textSize="18dp"
+                    android:textSize="11sp"
                     android:textStyle="italic"
-                    android:text="Daftarkan wajah untuk absensimu"/>
+                    android:text="Daftarkan wajah untuk untuk menggunakan aplikasi apsensi"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </GridLayout>
@@ -179,7 +183,7 @@
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="7dp"
                 android:text="Ganti Password"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textColor="@color/black"
                 android:padding="3dp"/>
             
@@ -201,7 +205,7 @@
                 android:layout_marginStart="55dp"
                 android:layout_marginTop="7dp"
                 android:text="Keluar Akun"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:textColor="@color/black"
                 android:padding="3dp"/>
         </androidx.cardview.widget.CardView>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+<!--    &lt;!&ndash; Base app theme. &ndash;&gt;-->
+<!--    <style name="Base.Theme.BottomNavigation" parent="Theme.Material3.DayNight.NoActionBar">-->
+<!--        &lt;!&ndash; Customize your light theme here. &ndash;&gt;-->
+<!--        <item name="colorPrimary">@color/primaryColor</item>-->
+<!--        <item name="colorPrimaryVariant">@color/primaryColor</item>-->
+<!--        <item name="android:statusBarColor">@color/primaryColor</item>-->
+<!--    </style>-->
+
+<!--    <style name="Base.Theme.BottomNavigation." parent="Base.Theme.BottomNavigation" />-->
+
+<!--    <style name="App.Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">-->
+<!--        <item name="android:color">@color/click</item>-->
+<!--    </style>-->
+
+</resources>
