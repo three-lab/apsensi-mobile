@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfilActivity">
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/panah1"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="370dp"
+        android:id="@+id/panah1"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Profil Saya"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginLeft="45dp"
+        android:layout_alignTop="@id/panah1"
+        />
+
+    <ImageView
+        android:id="@+id/framefoto"
+        android:layout_width="138dp"
+        android:layout_height="109dp"
+        android:layout_below="@+id/panah1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/foto_profil"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AHMAD IRSYADUL IBAD"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/framefoto"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:id="@+id/textnama"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ahmadirsyadulibad7@gmail.com"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textnama"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:id="@+id/textemail"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+62 882 1726 1702"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/textemail"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:id="@+id/textnohp"
+        />
+
+    <ImageView
+        android:layout_width="329dp"
+        android:layout_height="128dp"
+        android:layout_below="@+id/textnohp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:src="@drawable/frame_21"
+        android:id="@+id/frame1"
+
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/frame_24"
+        android:layout_below="@+id/frame1"
+        android:layout_centerHorizontal="true"
+        />
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="350dp"
+        android:src="@drawable/edit_2"
+        android:id="@+id/edit1"
+        />
+
+
+</RelativeLayout>

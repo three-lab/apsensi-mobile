@@ -6,6 +6,11 @@
 android {
     namespace = "com.threelab.apsensi"
     compileSdk = 34
+    buildFeatures {
+        viewBinding = true
+
+    }
+
 
     defaultConfig {
         applicationId = "com.threelab.apsensi"
