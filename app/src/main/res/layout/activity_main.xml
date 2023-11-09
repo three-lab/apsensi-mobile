@@ -44,7 +44,7 @@
         android:id="@+id/ly_1" >
 
         <EditText
-            android:id="@+id/edit_username"
+            android:id="@+id/input_username"
             android:layout_width="match_parent"
             android:layout_height="57dp"
             android:layout_marginTop="15dp"
@@ -65,13 +65,13 @@
             android:drawableStart="@drawable/lock"
             android:drawablePadding="20dp"
             android:backgroundTint="@color/backgroundInt"
-            android:id="@+id/edit_password"/>
+            android:id="@+id/input_password"/>
 
         <TextView
             android:id="@+id/btnlupapass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/edit_password"
+            android:layout_below="@+id/input_password"
             android:text="Lupa Password?"
             android:layout_marginTop="18dp"
             android:layout_marginLeft="245dp"
@@ -79,7 +79,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_1"
+        android:id="@+id/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ly_1"
@@ -88,7 +88,7 @@
         android:width="306dp"
         android:background="@drawable/button_shape"
         android:text="Login"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
     <ImageView
