@@ -20,4 +20,5 @@ class PreferencesHelper (context: Context) {
     fun getString(key: String) : String? {
         return sharedpref.getString(key, null)
     }
+
 }

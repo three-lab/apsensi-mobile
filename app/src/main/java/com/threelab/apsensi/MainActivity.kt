@@ -1,18 +1,24 @@
 package com.threelab.apsensi
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
+import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.threelab.apsensi.Helper.Constant
+import com.threelab.apsensi.Helper.PreferencesHelper
 import org.json.JSONObject
 
 
 class  MainActivity : AppCompatActivity() {
+
+    private lateinit var sharedpref: PreferencesHelper
+    private lateinit var requestQueue: RequestQueue
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,18 +29,41 @@ class  MainActivity : AppCompatActivity() {
         val password: EditText = findViewById(R.id.input_password);
         val loginBtn: Button = findViewById(R.id.login_button);
 
-        loginBtn.setOnClickListener {view ->
+        loginBtn.setOnClickListener { view ->
             login(username.text.toString(), password.text.toString())
-            Log.d("Button", "Button Clicked")
 
-            val sharedPreferences = getSharedPreferences("token", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
+            Log.d("token", sharedpref.getString(Constant.PREF_TOKEN).toString())
         }
     }
 
-    fun login(username: String, password: String) {
-        val loginUrl = "https://apsensi.irsyadulibad.my.id/api/login";
-        val requestQueue = Volley.newRequestQueue(this@MainActivity);
+    override fun onStart() {
+        super.onStart()
+
+        sharedpref = PreferencesHelper(this@MainActivity)
+        requestQueue = Volley.newRequestQueue(this@MainActivity)
+
+        if (sharedpref.getString(Constant.PREF_TOKEN)?.isNotEmpty() == true) {
+            if (getUser()) {
+                startActivity(Intent(this, BerandaActivity::class.java))
+                finish()
+            }
+        }
+    }
+
+    fun getUser(): Boolean {
+        val loginUrl = Constant.API_ENDPOINT + "/user"
+
+        // JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, loginUrl, null,
+        //    { response -> {
+
+        //    },
+
+        //      })
+    }
+
+
+    private fun login(username: String, password: String) {
+        val loginUrl = Constant.API_ENDPOINT + "/login";
 
         val dataRequest = JSONObject();
         dataRequest.put("username", username);
@@ -50,7 +79,10 @@ class  MainActivity : AppCompatActivity() {
                 // Dapetin token
                 val token = data.getString("token")
 
-                Log.d("Response", token)
+                sharedpref.put(Constant.PREF_TOKEN, token)
+
+                startActivity(Intent(this, BerandaActivity::class.java))
+                finish()
             },
             { response ->
                 val json = JSONObject(String(response.networkResponse.data))
@@ -58,9 +90,6 @@ class  MainActivity : AppCompatActivity() {
 
                 Log.d("Response", json.toString())
             });
-        {
-
-        }
 
         requestQueue.add(loginRequest)
 
