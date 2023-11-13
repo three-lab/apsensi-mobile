@@ -27,13 +27,13 @@
         android:layout_alignTop="@id/panah1"
         />
 
-    <ImageButton
+    <ImageView
         android:layout_width="20dp"
         android:layout_height="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="350dp"
         android:src="@drawable/edit_2"
-        android:id="@+id/edit1"
+
         />
     <ImageView
         android:layout_width="wrap_content"
@@ -53,106 +53,106 @@
         android:layout_below="@id/framefoto"
         android:gravity="center_horizontal"
         android:layout_marginTop="15dp"
-        android:id="@+id/textaja"
+        android:id="@+id/text"
         />
-    <LinearLayout
+    <EditText 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/textaja"
-        android:padding="30dp"
-        android:id="@+id/linearlayout1">
+        android:layout_height="57dp"
+        android:background="@drawable/button_shape"
+        android:drawableLeft="@drawable/user"
+        android:hint="Nama Lengkap"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/white"
+        android:layout_below="@+id/text"
+        android:id="@+id/namaLengkap"
+        />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/button_shape"
-            android:drawableLeft="@drawable/user"
-            android:hint="Nama Lengkap"
-            android:paddingLeft="15dp"
-            android:backgroundTint="@color/white"
-            android:layout_below="@+id/textaja"
-            android:id="@+id/namaLengkap"
-            />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/button_shape"
+        android:hint="Nama Panggilan"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/user"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:backgroundTint="@color/white"
+        android:layout_below="@+id/namaLengkap"
+        android:id="@+id/namaPanggilan"
+        />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/button_shape"
-            android:hint="Nama Panggilan"
-            android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/user"
-            android:layout_marginTop="15dp"
-            android:backgroundTint="@color/white"
-            android:layout_below="@+id/textaja"
-            android:id="@+id/namaPanggilan"
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/button_shape"
+        android:hint="Tempat Lahir"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/calendar2"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/white"
+        android:layout_below="@+id/namaPanggilan"
+        android:id="@+id/tempatlahir"
+        />
 
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/button_shape"
-            android:hint="Tempat Lahir"
-            android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/calendar2"
-            android:layout_marginTop="15dp"
-            android:backgroundTint="@color/white"
-            android:layout_below="@+id/textaja"
-            android:id="@+id/tempatlahir"
-
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/button_shape"
-            android:hint="Tanggal Lahir"
-            android:paddingLeft="15dp"
-            android:drawableLeft="@drawable/calendar2"
-            android:layout_marginTop="15dp"
-            android:backgroundTint="@color/white"
-            android:layout_below="@+id/textaja"
-            android:id="@+id/tanggalahir"
-
-            />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@drawable/button_shape"
-            android:hint="Alamat"
-            android:paddingLeft="15dp"
-            android:layout_marginTop="15dp"
-            android:drawableLeft="@drawable/location"
-            android:backgroundTint="@color/white"
-            android:layout_below="@+id/textaja"
-            android:id="@+id/alamat"
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/button_shape"
+        android:hint="Tanggal Lahir"
+        android:paddingLeft="15dp"
+        android:drawableLeft="@drawable/calendar2"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:backgroundTint="@color/white"
+        android:layout_below="@+id/tempatlahir"
+        android:id="@+id/tanggalahir"
 
             />
 
-    </LinearLayout>
-
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:background="@drawable/button_shape"
+        android:hint="Alamat"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:drawableLeft="@drawable/location"
+        android:backgroundTint="@color/white"
+        android:layout_below="@+id/tanggalahir"
+        android:id="@+id/alamat"
+        />
     <Button
+        android:id="@+id/simpanPerubahan_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Simpan Perubahan"
-        android:layout_below="@+id/linearlayout1"
+        android:layout_below="@id/alamat"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:width="306dp"
         android:background="@drawable/button_shape"
-        android:width="250dp"
+        android:text="Simpan Perubahan"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:id="@+id/button1"
-        />
-
-
-
-
-
-
-
-
-
-
+        android:textSize="18sp" />
 </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Apsensi"
         tools:targetApi="31">
         <activity
+            android:name=".ScanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ProfilActivity"
             android:exported="false" />
         <activity
