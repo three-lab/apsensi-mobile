@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="350dp"
-        android:src="@drawable/edit_2"
+        android:background="@drawable/edit_2"
         android:id="@+id/edit1"
         />
 
