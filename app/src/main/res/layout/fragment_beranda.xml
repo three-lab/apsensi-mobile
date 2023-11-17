@@ -13,45 +13,28 @@
         android:layout_height="40dp"
         android:src="@drawable/logo"
         android:layout_margin="30dp" />
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="130dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="290dp"
-        android:layout_marginTop="25dp">
 
-        <ImageView
-            android:layout_width="130dp"
-            android:layout_height="60dp"
-            android:background="@drawable/button_shape3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="20dp">
         <Button
-            android:id="@+id/btn_profil"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_marginStart="10dp"
-            android:drawableBottom="@drawable/user"
-            android:gravity="center_horizontal"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:backgroundTint="@color/buttonGrey2"
-            android:contentDescription="Tombol Profil"/>
-
+            android:background="@drawable/frame_user"
+            android:layout_marginTop="3dp"
+            android:contentDescription="btn_profil1"/>
         <Button
-            android:id="@+id/btn_notif"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="5dp"
-            android:drawableBottom="@drawable/bell"
-            android:gravity="center"
-            app:layout_constraintStart_toEndOf="@id/btn_profil"
-            app:layout_constraintTop_toTopOf="parent"
-            android:backgroundTint="@color/buttonGrey2"
-            android:contentDescription="Tombol Notifikasi"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="55dp"
+            android:background="@drawable/frame_notif"
+            android:layout_marginTop="3dp"
+            android:contentDescription="btn_profil2"/>
+    </RelativeLayout>
+
 <TextView
     android:id="@+id/display"
     android:layout_width="160dp"
@@ -60,7 +43,7 @@
     android:layout_marginStart="25dp"
     android:text="Hello..."
     android:textColor="@color/black"
-    android:textSize="20dp"
+    android:textSize="15sp"
     />
     <TextView
     android:layout_width="260dp"
@@ -69,36 +52,36 @@
     android:layout_marginStart="25dp"
     android:text="Selamat Siang"
     android:textColor="@color/black"
-    android:textSize="20dp"
+    android:textSize="15sp"
     />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:orientation="vertical"
         android:layout_marginTop="140dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="120dp"
             android:background="@drawable/button_shape"
             android:layout_margin="20dp">
             <TextView
                 android:layout_width="230dp"
                 android:layout_height="30dp"
                 android:text="Ahmad Irsyadul Ibad"
-                android:textSize="20dp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginStart="10dp"/>
             <TextView
                 android:layout_width="230dp"
                 android:layout_height="30dp"
                 android:text="353678990"
-                android:textSize="18dp"
+                android:textSize="15sp"
                 android:textStyle="italic"
                 android:textColor="@color/white"
-                android:layout_marginTop="75dp"
+                android:layout_marginTop="65dp"
                 android:layout_marginStart="10dp"/>
             
             <ImageView
@@ -109,9 +92,9 @@
 
         </RelativeLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
     
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="310dp">
@@ -121,11 +104,12 @@
             android:layout_height="310dp"
             android:rowCount="3"
             android:columnCount="2"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_below="@+id/data">
+            android:layout_marginEnd="20dp">
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/kalenderCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/primaryColor"
@@ -138,7 +122,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -148,18 +132,22 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
                         android:src="@drawable/calendar"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
                         android:text="Kalender"
                         android:textColor="@color/white"
                         android:textStyle="bold"
-                        android:textAlignment="center"/>
-                </LinearLayout>
+                        />
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/laporanCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/primaryColor"
@@ -172,7 +160,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -182,17 +170,21 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
                         android:src="@drawable/laporan"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Laporan"
+                        android:layout_marginTop="30dp"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:textAlignment="center"/>
-                </LinearLayout>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/izinCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/primaryColor"
@@ -205,7 +197,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -215,17 +207,21 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:src="@drawable/ijin"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Izin"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginStart="5dp"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:textAlignment="center"/>
-                </LinearLayout>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/bantuanCard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/primaryColor"
@@ -238,7 +234,7 @@
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -248,20 +244,23 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
                         android:src="@drawable/faq"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bantuan"
+                        android:layout_marginTop="30dp"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:textAlignment="center"/>
-                </LinearLayout>
+                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
         </GridLayout>
         
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>

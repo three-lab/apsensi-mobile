@@ -52,13 +52,24 @@ class  MainActivity : AppCompatActivity() {
 
     fun getUser(): Boolean {
         val loginUrl = Constant.API_ENDPOINT + "/user"
+        // Contoh menggunakan JsonObjectRequest (mungkin Anda perlu menyesuaikan dengan kebutuhan)
+        val request = JsonObjectRequest(Request.Method.GET, loginUrl, null,
+            { response ->
+                // Proses respons jika berhasil
+                // ...
 
-        // JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, loginUrl, null,
-        //    { response -> {
+            },
+            { error ->
+                // Proses kesalahan jika ada
+                // ...
 
-        //    },
+            })
+        // Tambahkan permintaan ke antrian
+        requestQueue.add(request)
 
-        //      })
+        // Kembalikan nilai sesuai kebutuhan
+        // Misalnya, Anda dapat mengembalikan true jika permintaan berhasil dijalankan, dan false sebaliknya.
+        return true
     }
 
 

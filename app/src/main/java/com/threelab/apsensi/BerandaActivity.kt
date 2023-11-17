@@ -15,10 +15,11 @@ class BerandaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beranda)
+        supportActionBar?.hide()
 
         bottomNavigationView = findViewById(R.id.bottom_Navigation)
 
-        bottomNavigationView.setOnItemReselectedListener { menuItem ->
+        bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.beranda -> {
                     replaceFragment(BerandaFragment())

@@ -10,45 +10,51 @@
         android:layout_width="190dp"
         android:layout_height="40dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:text="Jadwal"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:layout_width="110dp"
-        android:layout_height="60dp"
-        android:src="@drawable/button_shape3"
-        android:layout_marginStart="299dp"
-        android:layout_marginTop="40dp"/>
-    <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="315dp"
-        android:src="@drawable/user"
-        android:layout_marginTop="50dp"/>
-    <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="360dp"
-        android:src="@drawable/bell"
-        android:layout_marginTop="50dp"/>
+    <RelativeLayout
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="270dp"
+        android:layout_marginTop="20dp">
+        <Button
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/frame_user"
+            android:layout_marginTop="3dp"
+            android:contentDescription="btn_profil1"/>
+        <Button
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="55dp"
+            android:background="@drawable/frame_notif"
+            android:layout_marginTop="3dp"
+            android:contentDescription="btn_profil2"/>
+    </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_marginTop="120dp"
         android:id="@+id/profilview">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:background="@drawable/button_shape"
-            android:layout_margin="10dp"/>
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/button_shape"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <GridLayout
         android:layout_width="match_parent"
@@ -62,32 +68,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
-            android:layout_column="0"
-            android:layout_gravity="fill"
             android:layout_rowWeight="1"
+            android:layout_column="0"
             android:layout_columnWeight="1"
+            android:layout_gravity="fill"
             android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
-            
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:gravity="center"
-                android:layout_gravity="center_vertical|center_horizontal">
+                android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/img_jadwal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/jadwal"/>
+                    android:layout_marginStart="35dp"
+                    android:gravity="center"
+                    android:src="@drawable/jadwal" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/img_jadwal"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginTop="10dp"
                     android:text="Hari Selasa"
-                    android:textStyle="bold"
-                    android:textAlignment="center"/>
-            </LinearLayout>
+                    android:textAlignment="center"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -103,24 +120,28 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:gravity="center"
+                android:orientation="vertical"
                 android:layout_gravity="center_vertical|center_horizontal">
 
-                <ImageView
+            <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginStart="25dp"
                     android:src="@drawable/jadwal"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hari Rabu"
+                    android:layout_marginTop="38dp"
+                    android:layout_marginStart="15dp"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
-            </LinearLayout>
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -136,7 +157,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -146,14 +167,17 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:src="@drawable/jadwal"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="35dp"
                     android:text="Hari Kamis"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
-            </LinearLayout>
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -169,7 +193,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -179,14 +203,17 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
                     android:src="@drawable/jadwal"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginStart="5dp"
                     android:text="Hari Jum'at"
                     android:textStyle="bold"
                     android:textAlignment="center"/>
-            </LinearLayout>
+            </RelativeLayout>
 
         </androidx.cardview.widget.CardView>
     </GridLayout>
