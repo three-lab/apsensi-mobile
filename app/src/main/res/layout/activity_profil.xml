@@ -70,22 +70,21 @@
         android:id="@+id/textnohp"
         />
 
+
     <ImageView
-        android:layout_width="329dp"
-        android:layout_height="128dp"
-        android:layout_below="@+id/textnohp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="13dp"
-        android:src="@drawable/frame_21"
-        android:id="@+id/frame1"
+        android:layout_width="356dp"
+        android:layout_height="132dp"
+        android:layout_below="@id/textnohp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_shape"
+        android:layout_centerHorizontal="true"/>
+
 
         />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/frame_24"
-        android:layout_below="@+id/frame1"
-        android:layout_centerHorizontal="true"
+
         />
 
 
