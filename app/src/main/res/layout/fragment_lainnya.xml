@@ -9,7 +9,7 @@
         android:layout_width="120dp"
         android:layout_height="40dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:text="Lainnya"
@@ -107,8 +107,8 @@
                     android:layout_marginStart="50dp"
                     android:textColor="@color/black"
                     android:text="Verifikasi Email-mu"
-                    android:paddingTop="3dp"
-                    android:textSize="15sp"
+                    android:paddingTop="5dp"
+                    android:textSize="12sp"
                     android:textStyle="bold"/>
                 <TextView
                     android:layout_width="300dp"
@@ -117,7 +117,7 @@
                     android:layout_marginLeft="50dp"
                     android:layout_marginRight="20dp"
                     android:textColor="@color/black"
-                    android:textSize="11sp"
+                    android:textSize="10sp"
                     android:textStyle="italic"
                     android:text="Tingkatkan keamanan dengan verifikasi alamat email"/>
 
@@ -142,8 +142,8 @@
                 android:layout_marginStart="50dp"
                 android:textColor="@color/black"
                 android:text="Daftarkan Wajah"
-                android:paddingTop="3dp"
-                android:textSize="15sp"
+                android:paddingTop="5dp"
+                android:textSize="12sp"
                 android:textStyle="bold"/>
             <TextView
                 android:layout_width="300dp"
@@ -152,7 +152,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="20dp"
                 android:textColor="@color/black"
-                android:textSize="11sp"
+                android:textSize="10sp"
                 android:textStyle="italic"
                 android:text="Daftarkan wajah untuk menggunakan aplikasi absensi"/>
 
@@ -170,12 +170,16 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="30dp">
+
             <ImageButton
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/lock2"
-                android:contentDescription="btn_forpass"/>
+                android:contentDescription="btn_forpass" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -185,21 +189,32 @@
                 android:textColor="@color/black"
                 android:padding="3dp"
                 android:contentDescription="Ganti Password"/>
-            
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparan"
+                android:id="@+id/gantipassword"/>
+
+
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="350dp"
             android:layout_height="30dp"
             android:layout_marginTop="45dp">
+
+
             <ImageButton
                 android:id="@+id/btn_logout"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:layout_margin="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:background="@drawable/log_out"
-                android:contentDescription="btn_logout"
-                />
+                android:contentDescription="btn_logout" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -209,6 +224,13 @@
                 android:textColor="@color/black"
                 android:padding="3dp"
                 android:contentDescription="viewlogout"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparan"
+                android:id="@+id/logOut"/>
+
         </RelativeLayout>
 
     </RelativeLayout>

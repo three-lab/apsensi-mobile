@@ -135,14 +135,15 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="10dp"
                         android:src="@drawable/calendar"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="40dp"
                         android:text="Kalender"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        />
+                        android:textStyle="bold" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
@@ -177,7 +178,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Laporan"
-                        android:layout_marginTop="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="40dp"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:textAlignment="center"/>
@@ -213,7 +215,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Izin"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginStart="5dp"
                         android:textColor="@color/white"
                         android:textStyle="bold"
@@ -251,7 +254,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Bantuan"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_centerHorizontal="true"
                         android:textColor="@color/white"
                         android:textStyle="bold"
                         android:textAlignment="center"/>

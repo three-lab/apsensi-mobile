@@ -50,6 +50,7 @@
         android:text="Scan Wajah"
         android:textColor="@color/white"
         android:textSize="15sp"
+        android:id="@+id/cameraScan"
         android:drawableLeft="@drawable/camera"/>
 
     <TextView

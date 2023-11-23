@@ -9,5 +9,6 @@
     <color name="buttonGrey">#C1C1C1</color>
     <color name="buttonGrey2">#E3E3E3</color>
     <color name="btn_menu">#535353</color>
+    <color name="transparan">#00000000</color>
 
 </resources>
