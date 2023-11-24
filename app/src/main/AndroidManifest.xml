@@ -24,8 +24,20 @@
         android:theme="@style/Theme.Apsensi"
         tools:targetApi="31">
         <activity
+            android:name=".FaqActivty"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".IzinActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".LaporanActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
+        <activity
             android:name=".ScanActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".CalendarActivity"
             android:exported="false" />

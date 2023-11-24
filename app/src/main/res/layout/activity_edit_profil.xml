@@ -8,10 +8,10 @@
     tools:context=".EditProfilActivity"
     android:backgroundTint="@color/background">
 
-    <ImageView
+    <ImageButton
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/panah1"
+        android:background="@drawable/panah1"
         android:layout_alignParentRight="true"
         android:layout_marginTop="25dp"
         android:layout_marginRight="370dp"

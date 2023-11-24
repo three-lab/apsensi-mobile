@@ -9,6 +9,8 @@
     <color name="buttonGrey">#C1C1C1</color>
     <color name="buttonGrey2">#E3E3E3</color>
     <color name="btn_menu">#535353</color>
-    <color name="transparan">#00000000</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
 
 </resources>

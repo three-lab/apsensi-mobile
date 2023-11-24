@@ -74,7 +74,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:scrollbars="vertical"
-        tools:listitem="@layout/list_item_presensi"    >
+        tools:listitem="@layout/list_item_presensi">
         </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 

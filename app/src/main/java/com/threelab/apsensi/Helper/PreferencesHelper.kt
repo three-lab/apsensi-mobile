@@ -21,4 +21,8 @@ class PreferencesHelper (context: Context) {
         return sharedpref.getString(key, null)
     }
 
+    fun delete(key: String) {
+        editor.remove(key)
+    }
+
 }

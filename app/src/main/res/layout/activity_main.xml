@@ -68,11 +68,12 @@
             android:backgroundTint="@color/backgroundInt"
             android:id="@+id/input_password"/>
 
-        <TextView
+        <Button
             android:id="@+id/btnlupapass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/input_password"
+            android:background="@android:color/transparent"
             android:text="Lupa Password?"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
