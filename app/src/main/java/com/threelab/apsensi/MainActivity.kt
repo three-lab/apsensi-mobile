@@ -60,11 +60,14 @@ class  MainActivity : AppCompatActivity() {
     }
 
     fun getUser(): Boolean {
-        requestQueue = Volley.newRequestQueue(this@MainActivity)
         val loginUrl = Constant.API_ENDPOINT + "/user"
 
+        // Membuat HashMap untuk menyimpan header
+        val headers = HashMap<String, String>()
+        headers["Authorization"] = sharedpref.getString(Constant.PREF_TOKEN).toString() // Ganti dengan token akses yang sesuai
+
         // Contoh menggunakan JsonObjectRequest (mungkin Anda perlu menyesuaikan dengan kebutuhan)
-        val request = JsonObjectRequest(Request.Method.GET, loginUrl, null,
+        val request = object : JsonObjectRequest(Request.Method.GET, loginUrl, null,
             { response ->
                 // Handling response when the request is successful
                 // Misalnya, Anda dapat melakukan sesuatu dengan respons JSON di sini
@@ -79,7 +82,12 @@ class  MainActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this@MainActivity.applicationContext, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
                 }
-            })
+            }) {
+            // Override fungsi getHeaders untuk menambahkan header ke permintaan
+            override fun getHeaders(): MutableMap<String, String> {
+                return headers
+            }
+        }
 
         // Tambahkan permintaan ke antrian
         requestQueue.add(request)
@@ -88,6 +96,7 @@ class  MainActivity : AppCompatActivity() {
         // Misalnya, Anda dapat mengembalikan true jika permintaan berhasil dijalankan, dan false sebaliknya.
         return true
     }
+
 
 
 
