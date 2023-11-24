@@ -69,21 +69,12 @@ class  MainActivity : AppCompatActivity() {
         // Contoh menggunakan JsonObjectRequest (mungkin Anda perlu menyesuaikan dengan kebutuhan)
         val request = object : JsonObjectRequest(Request.Method.GET, loginUrl, null,
             { response ->
-                // Handling response when the request is successful
-                // Misalnya, Anda dapat melakukan sesuatu dengan respons JSON di sini
+                Log.d("Tokenn", response.toString())
             },
             { error ->
-                // Handling error response
-                Log.e("VolleyError", "Error: ${error.networkResponse?.statusCode}, ${String(error.networkResponse?.data ?: ByteArray(0))}")
-
-                if (error.networkResponse?.statusCode == 401) {
-                    // Token kedaluwarsa atau tidak valid
-                    Toast.makeText(this@MainActivity.applicationContext, "Token kedaluwarsa, silakan login kembali", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@MainActivity.applicationContext, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
-                }
+                Log.e("Tokennn", error.toString())
             }) {
-            // Override fungsi getHeaders untuk menambahkan header ke permintaan
+
             override fun getHeaders(): MutableMap<String, String> {
                 return headers
             }
@@ -123,8 +114,9 @@ class  MainActivity : AppCompatActivity() {
                 finish()
             },
             { error ->
-                // Handle error, misalnya:
-                Toast.makeText(this@MainActivity, "Login failed: ${error.message}", Toast.LENGTH_SHORT).show()
+                val response = JSONObject(String(error.networkResponse?.data ?: ByteArray(0)))
+
+                Toast.makeText(this@MainActivity, "Login failed: ${response.getJSONObject("meta").getString("message")}", Toast.LENGTH_SHORT).show()
                 Log.e("LoginError", error.toString())
             });
 

@@ -33,8 +33,6 @@ class BerandaFragment : Fragment() {
 
         requestQueue = Volley.newRequestQueue(requireContext())
 
-        getDataLogin()
-
         // Declare CardView instances
         val kalenderCard: CardView = view.findViewById(R.id.kalenderCard)
         val laporanCard: CardView = view.findViewById(R.id.laporanCard)
@@ -64,31 +62,5 @@ class BerandaFragment : Fragment() {
             startActivity(intent)
         }
         return view
-    }
-    private fun getDataLogin() {
-        val loginUrl = Constant.API_ENDPOINT + "/user"
-        val request = JsonObjectRequest(
-            Request.Method.GET, loginUrl, null,
-            { response ->
-                // Tangani respons sukses di sini
-                val username = response.getString("username")
-                val email = response.getString("email")
-
-                // Contoh menampilkan data ke log
-                Log.d("UserData", "Username: $username, Email: $email")
-            },
-            { error ->
-                // Tangani kesalahan di sini
-                if (error.networkResponse?.statusCode == 401) {
-                    // Token kedaluwarsa atau tidak valid
-                    // Lakukan tindakan yang sesuai, seperti meminta pengguna untuk login kembali
-                    Toast.makeText(requireContext(), "Token expired, please login again", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(activity, "Token expired, please login again", Toast.LENGTH_SHORT).show()
-                }
-            })
-
-        // Tambahkan permintaan ke antrian
-        requestQueue.add(request)
     }
 }
