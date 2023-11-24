@@ -62,12 +62,15 @@ class  MainActivity : AppCompatActivity() {
     fun getUser(): Boolean {
         requestQueue = Volley.newRequestQueue(this@MainActivity)
         val loginUrl = Constant.API_ENDPOINT + "/user"
+
         // Contoh menggunakan JsonObjectRequest (mungkin Anda perlu menyesuaikan dengan kebutuhan)
         val request = JsonObjectRequest(Request.Method.GET, loginUrl, null,
             { response ->
-                Toast.makeText(this@MainActivity.applicationContext, "Login successful", Toast.LENGTH_SHORT).show()
+                // Handling response when the request is successful
+                // Misalnya, Anda dapat melakukan sesuatu dengan respons JSON di sini
             },
             { error ->
+                // Handling error response
                 Log.e("VolleyError", "Error: ${error.networkResponse?.statusCode}, ${String(error.networkResponse?.data ?: ByteArray(0))}")
 
                 if (error.networkResponse?.statusCode == 401) {
@@ -77,6 +80,7 @@ class  MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity.applicationContext, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
                 }
             })
+
         // Tambahkan permintaan ke antrian
         requestQueue.add(request)
 
@@ -84,6 +88,7 @@ class  MainActivity : AppCompatActivity() {
         // Misalnya, Anda dapat mengembalikan true jika permintaan berhasil dijalankan, dan false sebaliknya.
         return true
     }
+
 
 
     private fun login(username: String, password: String) {

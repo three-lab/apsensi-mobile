@@ -23,6 +23,7 @@ class PreferencesHelper (context: Context) {
 
     fun delete(key: String) {
         editor.remove(key)
+        editor.apply()
     }
 
 }
