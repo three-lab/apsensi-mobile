@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import com.threelab.apsensi.EditProfilActivity
 import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.Helper.PreferencesHelper
 import com.threelab.apsensi.MainActivity
@@ -18,18 +20,19 @@ class LainnyaFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         sharedPref = PreferencesHelper(requireContext())
     }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.fragment_lainnya, container, false)
 
         val btnLogout: Button = root.findViewById(R.id.logOut)
+        val toprofil: ImageButton = root.findViewById(R.id.toprofil)
 
         btnLogout.setOnClickListener {
             clearToken()
@@ -38,6 +41,11 @@ class LainnyaFragment : Fragment() {
             startActivity(intent)
 
             activity?.finish()
+        }
+
+        toprofil.setOnClickListener{
+            val intent = Intent(activity, EditProfilActivity::class.java)
+            startActivity(intent)
         }
         return root
     }
