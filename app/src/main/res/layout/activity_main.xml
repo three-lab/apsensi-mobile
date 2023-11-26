@@ -76,6 +76,7 @@
             android:layout_below="@+id/input_password"
             android:background="@android:color/transparent"
             android:text="Lupa Password?"
+            android:textAllCaps="false"
             android:textColor="@color/black"
             android:layout_alignParentRight="true" />
 
@@ -93,6 +94,17 @@
         android:text="Login"
         android:textColor="@color/white"
         android:textSize="18sp" />
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_button"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:text=""
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginTop="10dp"/>
 
 
     <ImageView
