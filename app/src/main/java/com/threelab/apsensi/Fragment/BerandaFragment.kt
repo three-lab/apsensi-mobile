@@ -2,27 +2,29 @@ package com.threelab.apsensi.Fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import com.android.volley.Request
 import com.android.volley.RequestQueue
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.threelab.apsensi.CalendarActivity
 import com.threelab.apsensi.FaqActivty
-import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.IzinActivity
 import com.threelab.apsensi.LaporanActivity
 import com.threelab.apsensi.R
+import java.util.Calendar
 
 class BerandaFragment : Fragment() {
 
     lateinit var requestQueue: RequestQueue
+    lateinit var waktumasuk: TextView
+    private val handler = Handler(Looper.getMainLooper())
+    private val updateInterval: Long = 1000 //update setiap 1 detik
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +63,41 @@ class BerandaFragment : Fragment() {
             val intent = Intent(activity, IzinActivity::class.java)
             startActivity(intent)
         }
+
+        // Inisialisasi TextView
+        waktumasuk = view.findViewById(R.id.waktumasuk)
+
+        // Jalankan Runnable untuk memperbarui waktu masuk setiap detik
+        handler.postDelayed(runnable, updateInterval)
         return view
+    }
+    private val runnable = object : Runnable {
+        override fun run() {
+            // Perbarui TextView dengan waktu masuk saat ini
+            updateWaktu()
+
+            // Jalankan kembali Runnable setelah interval tertentu
+            handler.postDelayed(this, updateInterval)
+        }
+    }
+
+    private fun updateWaktu() {
+        val calendar = Calendar.getInstance()
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+
+        val greeting = when {
+            hour >= 5 && hour < 12 -> "Selamat Pagi"
+            hour >= 12 && hour < 15 -> "Selamat Siang"
+            hour >= 15 && hour < 18 -> "Selamat Sore"
+            else -> "Selamat Malam"
+        }
+
+        waktumasuk.text = greeting
+    }
+
+    override fun onDestroyView() {
+        // Hentikan Runnable saat Fragment dihancurkan
+        handler.removeCallbacks(runnable)
+        super.onDestroyView()
     }
 }

@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.threelab.apsensi.EditProfilActivity
+import com.threelab.apsensi.ForgotActivity
 import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.Helper.PreferencesHelper
 import com.threelab.apsensi.MainActivity
@@ -32,6 +33,7 @@ class LainnyaFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_lainnya, container, false)
 
         val btnLogout: Button = root.findViewById(R.id.logOut)
+        val gantipassword: Button = root.findViewById(R.id.gantipassword)
         val toprofil: ImageButton = root.findViewById(R.id.toprofil)
 
         btnLogout.setOnClickListener {
@@ -41,6 +43,11 @@ class LainnyaFragment : Fragment() {
             startActivity(intent)
 
             activity?.finish()
+        }
+
+        gantipassword.setOnClickListener{
+            val intent = Intent(activity, ForgotActivity::class.java)
+            startActivity(intent)
         }
 
         toprofil.setOnClickListener{
