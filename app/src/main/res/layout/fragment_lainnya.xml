@@ -37,7 +37,7 @@
             android:layout_marginStart="55dp"
             android:background="@drawable/frame_notif"
             android:layout_marginTop="3dp"
-            android:contentDescription="btn_profil2"/>
+            android:contentDescription="btn_notif"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -76,10 +76,10 @@
 
         <ImageButton
             android:id="@+id/toprofil"
-            android:layout_width="30dp"
-            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="@drawable/icon_right"
-            android:layout_marginLeft="330dp"
+            android:layout_marginLeft="310dp"
             android:layout_marginTop="10dp"
             android:contentDescription="ke profil"/>
 

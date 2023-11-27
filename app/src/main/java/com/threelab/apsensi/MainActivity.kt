@@ -5,14 +5,17 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
 import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.Helper.PreferencesHelper
+import com.threelab.apsensi.data.Employee
+import com.threelab.apsensi.data.SessionData
 import org.json.JSONObject
 
 
@@ -20,6 +23,7 @@ class  MainActivity : AppCompatActivity() {
 
     private lateinit var sharedpref: PreferencesHelper
     private lateinit var requestQueue: RequestQueue
+    private lateinit var errorMessageTextView : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,17 +37,41 @@ class  MainActivity : AppCompatActivity() {
         val password: EditText = findViewById(R.id.input_password);
         val loginBtn: Button = findViewById(R.id.login_button);
         val forgotpassBtn: Button = findViewById(R.id.btnlupapass);
+        errorMessageTextView = findViewById(R.id.error_message)
 
         loginBtn.setOnClickListener { view ->
-            login(username.text.toString(), password.text.toString())
+            val usernameInput = username.text.toString()
+            val passwordInput = password.text.toString()
 
-            Log.d("token", sharedpref.getString(Constant.PREF_TOKEN).toString())
+            when {
+                usernameInput.isEmpty() && passwordInput.isEmpty() -> {
+                    // Case 1: Username dan password tidak diisi
+                    errorMessageTextView.text = "Harap isi semua kolom terlebih dahulu"
+                }
+                usernameInput.isEmpty() -> {
+                    // Case 2: Username tidak diisi
+                    errorMessageTextView.text = "Username harus diisi!"
+                }
+                passwordInput.isEmpty() -> {
+                    // Case 3: Password tidak diisi
+                    errorMessageTextView.text = "Password harus diisi terlebih dahulu"
+                }
+
+                else -> {
+                    // Case 4: Validasi berhasil, lakukan login
+                    errorMessageTextView.text = ""
+                    login(usernameInput, passwordInput)
+                }
+            }
         }
 
         forgotpassBtn.setOnClickListener {
             val intent = Intent(this, ForgotActivity::class.java)
             startActivity(intent)
         }
+    }
+    private fun validateInput(username: String, password: String): Boolean {
+        return username.isNotEmpty()
     }
 
     override fun onStart() {
@@ -53,9 +81,7 @@ class  MainActivity : AppCompatActivity() {
         requestQueue = Volley.newRequestQueue(this@MainActivity)
 
         if (sharedpref.getString(Constant.PREF_TOKEN)?.isNotEmpty() == true) {
-            if (getUser()) {
-                startActivity(Intent(this, BerandaActivity::class.java))
-            }
+            getUser()
         }
     }
 
@@ -69,10 +95,14 @@ class  MainActivity : AppCompatActivity() {
         // Contoh menggunakan JsonObjectRequest (mungkin Anda perlu menyesuaikan dengan kebutuhan)
         val request = object : JsonObjectRequest(Request.Method.GET, loginUrl, null,
             { response ->
-                Log.d("Tokenn", response.toString())
+                val employeeJson = response.getJSONObject("data").getJSONObject("user");
+                SessionData.saveEmployee(employeeJson.toString())
+
+                startActivity(Intent(this@MainActivity, BerandaActivity::class.java))
+                finish()
             },
             { error ->
-                Log.e("Tokennn", error.toString())
+                sharedpref.delete(Constant.PREF_TOKEN)
             }) {
 
             override fun getHeaders(): MutableMap<String, String> {
@@ -110,13 +140,31 @@ class  MainActivity : AppCompatActivity() {
 
                 sharedpref.put(Constant.PREF_TOKEN, token)
 
-                startActivity(Intent(this@MainActivity, BerandaActivity::class.java))
-                finish()
+                getUser();
             },
             { error ->
                 val response = JSONObject(String(error.networkResponse?.data ?: ByteArray(0)))
+                val errorMessage = response.getJSONObject("meta").getString("message")
 
-                Toast.makeText(this@MainActivity, "Login failed: ${response.getJSONObject("meta").getString("message")}", Toast.LENGTH_SHORT).show()
+                when {
+                    errorMessage.contains("username") && errorMessage.contains("password") -> {
+                        // Case 1: Username dan password salah
+                        errorMessageTextView.text = "Silahkan cek kembali username dan password anda"
+                    }
+                    errorMessage.contains("password") -> {
+                        // Case 2: Password salah
+                        errorMessageTextView.text = "Password yang anda masukkan salah"
+                    }
+                    errorMessage.contains("username") -> {
+                        // Case 3: Username salah
+                        errorMessageTextView.text = "Username yang anda masukkan salah"
+                    }
+                    else -> {
+                        // Case default: Tampilkan pesan kesalahan umum
+                        errorMessageTextView.text = "Akun anda belum terdaftar"
+                    }
+                }
+
                 Log.e("LoginError", error.toString())
             });
 

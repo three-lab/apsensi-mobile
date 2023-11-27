@@ -9,41 +9,35 @@
     android:backgroundTint="@color/background">
 
     <ImageButton
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:background="@drawable/panah1"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="370dp"
-        android:id="@+id/panah1"
-        />
+        android:id="@+id/backlainnya"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/bx_arrow_back"/>
+
     <TextView
+        android:id="@+id/editprofil1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit Profil Saya"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textColor="@color/black"
         android:layout_marginLeft="45dp"
-        android:layout_alignTop="@id/panah1"
-        />
+        android:layout_marginTop="30dp" />
+
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="350dp"
-        android:src="@drawable/edit_2"
-
-        />
-    <ImageView
+        android:id="@+id/framefoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/framefoto"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/panah1"
+        android:layout_below="@+id/editprofil1"
         android:layout_marginTop="50dp"
-        android:id="@+id/framefoto"
-        />
+        android:clickable="true"
+        android:onClick="selectImage"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,10 +130,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/alamat"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:width="306dp"
+        android:layout_marginTop="15dp"
+        android:width="206dp"
         android:background="@drawable/button_shape"
         android:text="Simpan Perubahan"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp" />
 </RelativeLayout>
