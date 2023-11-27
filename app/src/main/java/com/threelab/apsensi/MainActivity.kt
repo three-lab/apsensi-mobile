@@ -11,8 +11,11 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
 import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.Helper.PreferencesHelper
+import com.threelab.apsensi.data.Employee
+import com.threelab.apsensi.data.SessionData
 import org.json.JSONObject
 
 
@@ -78,9 +81,7 @@ class  MainActivity : AppCompatActivity() {
         requestQueue = Volley.newRequestQueue(this@MainActivity)
 
         if (sharedpref.getString(Constant.PREF_TOKEN)?.isNotEmpty() == true) {
-            if (getUser()) {
-                startActivity(Intent(this, BerandaActivity::class.java))
-            }
+            getUser()
         }
     }
 
@@ -94,10 +95,14 @@ class  MainActivity : AppCompatActivity() {
         // Contoh menggunakan JsonObjectRequest (mungkin Anda perlu menyesuaikan dengan kebutuhan)
         val request = object : JsonObjectRequest(Request.Method.GET, loginUrl, null,
             { response ->
-                Log.d("Tokenn", response.toString())
+                val employeeJson = response.getJSONObject("data").getJSONObject("user");
+                SessionData.saveEmployee(employeeJson.toString())
+
+                startActivity(Intent(this@MainActivity, BerandaActivity::class.java))
+                finish()
             },
             { error ->
-                Log.e("Tokennn", error.toString())
+                sharedpref.delete(Constant.PREF_TOKEN)
             }) {
 
             override fun getHeaders(): MutableMap<String, String> {

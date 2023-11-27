@@ -17,11 +17,10 @@ import com.threelab.apsensi.FaqActivty
 import com.threelab.apsensi.IzinActivity
 import com.threelab.apsensi.LaporanActivity
 import com.threelab.apsensi.R
+import com.threelab.apsensi.data.SessionData
 import java.util.Calendar
 
 class BerandaFragment : Fragment() {
-
-    lateinit var requestQueue: RequestQueue
     lateinit var waktumasuk: TextView
     private val handler = Handler(Looper.getMainLooper())
     private val updateInterval: Long = 1000 //update setiap 1 detik
@@ -33,13 +32,14 @@ class BerandaFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_beranda, container, false)
 
-        requestQueue = Volley.newRequestQueue(requireContext())
-
         // Declare CardView instances
         val kalenderCard: CardView = view.findViewById(R.id.kalenderCard)
         val laporanCard: CardView = view.findViewById(R.id.laporanCard)
         val bantuanCard: CardView = view.findViewById(R.id.bantuanCard)
         val izinCard: CardView = view.findViewById(R.id.izinCard)
+        val namaAkun: TextView = view.findViewById(R.id.namaakun)
+
+        namaAkun.text = SessionData.getEmployee()?.fullname
 
         // Now you can use kalenderCard and laporanCard as needed
 

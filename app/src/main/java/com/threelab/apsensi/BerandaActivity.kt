@@ -1,6 +1,7 @@
 package com.threelab.apsensi
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -8,10 +9,13 @@ import com.threelab.apsensi.Fragment.AbsenFragment
 import com.threelab.apsensi.Fragment.BerandaFragment
 import com.threelab.apsensi.Fragment.JadwalFragment
 import com.threelab.apsensi.Fragment.LainnyaFragment
+import com.threelab.apsensi.data.Employee
+import com.threelab.apsensi.data.SessionData
 
 class BerandaActivity : AppCompatActivity() {
 
     private lateinit var bottomNavigationView: BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_beranda)
