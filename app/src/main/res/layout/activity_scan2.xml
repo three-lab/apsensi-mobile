@@ -4,72 +4,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ScanActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scan Wajah"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginLeft="45dp"
-        android:layout_marginTop="50dp"
-        />
+    tools:context=".ScanActivity2">
 
     <TextureView
         android:id="@+id/textureView"
-        android:layout_width="290dp"
-        android:layout_height="390dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"
-        android:scaleType="centerCrop" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-Pastikan wajah terlihat jelas tanpa menggunakan aksesoris (masker,dll).."
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_below="@id/textureView"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="15dp"
-        android:id="@+id/text1"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-Pastikan wajah anda terlihat dengan pencahayaan yang cukup, tidak buram, dan tidak ngelap"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_below="@id/text1"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="1dp"
-        android:id="@+id/text2"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-Pastikan berada di sekitar lokasi yang telah ditentukan"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_below="@id/text2"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="1dp"
-        android:id="@+id/text3"
-        />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+         />
+
     <Button
         android:id="@+id/kirim"
-        android:layout_width="250dp"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textureView"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="760dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/button_shape"
         android:text="kirim"
         android:textColor="@color/white"
         />
+
+    <Button
+        android:id="@+id/switchCamera"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="760dp"
+        android:background="@drawable/cameraswitch"
+        />
+
+
+    />
 
 </RelativeLayout>

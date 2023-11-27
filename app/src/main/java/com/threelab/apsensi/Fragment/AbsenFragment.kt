@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.threelab.apsensi.R
-import com.threelab.apsensi.ScanActivity
+import com.threelab.apsensi.ScanActivity2
 
 class AbsenFragment  : Fragment() {
     override fun onCreateView(
@@ -21,7 +21,7 @@ class AbsenFragment  : Fragment() {
         val cameraScan: Button = view.findViewById(R.id.cameraScan)
 
         cameraScan.setOnClickListener {
-            val intent = Intent(activity, ScanActivity::class.java)
+            val intent = Intent(activity, ScanActivity2::class.java)
             startActivity(intent)
         }
         return view

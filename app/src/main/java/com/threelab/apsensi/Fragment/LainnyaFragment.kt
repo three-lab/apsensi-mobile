@@ -12,6 +12,7 @@ import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.Helper.PreferencesHelper
 import com.threelab.apsensi.MainActivity
 import com.threelab.apsensi.R
+import com.threelab.apsensi.ScanActivity2
 
 class LainnyaFragment : Fragment() {
     private lateinit var sharedPref: PreferencesHelper
@@ -19,8 +20,10 @@ class LainnyaFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         sharedPref = PreferencesHelper(requireContext())
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,8 +45,12 @@ class LainnyaFragment : Fragment() {
         return root
     }
 
-    private fun clearToken(){
+    private fun clearToken() {
         // Dapatkan instance SharedPreferences
         sharedPref.delete(Constant.PREF_TOKEN)
     }
 }
+
+
+
+

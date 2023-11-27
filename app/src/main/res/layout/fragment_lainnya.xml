@@ -29,7 +29,8 @@
             android:layout_marginStart="10dp"
             android:background="@drawable/frame_user"
             android:layout_marginTop="3dp"
-            android:contentDescription="btn_profil1"/>
+            android:id="@+id/btnprofil1"
+           />
         <Button
             android:layout_width="38dp"
             android:layout_height="38dp"
