@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -16,7 +15,7 @@
         android:required="true" />
     <uses-feature
         android:name="android.hardware.camera.autofocus"
-        android:required="true"/>
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -29,6 +28,9 @@
         android:theme="@style/Theme.Apsensi"
         tools:targetApi="31">
         <activity
+            android:name=".ScanActivity2"
+            android:exported="false" />
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -40,18 +42,15 @@
         <activity
             android:name=".FaqActivty"
             android:exported="false"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".IzinActivity"
             android:exported="false"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".LaporanActivity"
             android:exported="false"
-            android:theme="@style/AppTheme"/>
-        <activity
-            android:name=".ScanActivity2"
-            android:exported="false"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".CalendarActivity"
             android:exported="false" />
@@ -66,8 +65,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".ForgotActivity"
             android:exported="true" />

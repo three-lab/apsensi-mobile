@@ -15,31 +15,25 @@ import android.hardware.camera2.CameraMetadata
 import android.hardware.camera2.CaptureRequest
 import android.os.Handler
 import android.os.HandlerThread
-import android.util.Size
 import android.util.SparseIntArray
 import android.view.Surface
 import android.view.TextureView
-import android.view.View
 import android.widget.Button
 import androidx.core.app.ActivityCompat
-import java.util.concurrent.Semaphore
 
 class ScanActivity2 : AppCompatActivity() {
 
+
     private lateinit var textureView: TextureView
-    private lateinit var switchCamera: Button
+    private lateinit var switchCameraButton: Button
     private lateinit var cameraManager: CameraManager
     private lateinit var cameraDevice: CameraDevice
+    private lateinit var captureRequestBuilder: CaptureRequest.Builder
     private lateinit var cameraCaptureSessions: CameraCaptureSession
-    private lateinit var captureRequestBuilder: android.hardware.camera2.CaptureRequest.Builder
     private lateinit var backgroundHandler: Handler
     private lateinit var backgroundThread: HandlerThread
     private var cameraId: String = ""
-    private var lensFacing: Int = CameraCharacteristics.LENS_FACING_BACK
-
-
-
-
+    private var currentCameraLensFacing = CameraCharacteristics.LENS_FACING_BACK
 
     companion object {
         private const val REQUEST_CAMERA_PERMISSION = 200
@@ -50,29 +44,29 @@ class ScanActivity2 : AppCompatActivity() {
             ORIENTATIONS.append(Surface.ROTATION_90, 180)
             ORIENTATIONS.append(Surface.ROTATION_180, 270)
             ORIENTATIONS.append(Surface.ROTATION_270, 360)
-
         }
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan2)
         supportActionBar?.hide()
 
         textureView = findViewById(R.id.textureView)
-        switchCamera = findViewById(R.id.switchCamera)
+        switchCameraButton = findViewById(R.id.switchCamera)
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
-        switchCamera.setOnClickListener {
+        switchCameraButton.setOnClickListener {
             switchCamera()
         }
+
         if (ActivityCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.CAMERA
+                Manifest.permission.CAMERA
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
-                this, arrayOf(android.Manifest.permission.CAMERA),
+                this,
+                arrayOf(Manifest.permission.CAMERA),
                 REQUEST_CAMERA_PERMISSION
             )
             return
@@ -82,11 +76,13 @@ class ScanActivity2 : AppCompatActivity() {
     }
 
     private fun switchCamera() {
-        if (lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
-            lensFacing = CameraCharacteristics.LENS_FACING_FRONT
-        } else {
-            lensFacing = CameraCharacteristics.LENS_FACING_BACK
-        }
+        currentCameraLensFacing =
+            if (currentCameraLensFacing == CameraCharacteristics.LENS_FACING_BACK) {
+                CameraCharacteristics.LENS_FACING_FRONT
+            } else {
+                CameraCharacteristics.LENS_FACING_BACK
+            }
+
         closeCamera()
         openCamera()
     }
@@ -95,7 +91,7 @@ class ScanActivity2 : AppCompatActivity() {
         val cameraIdList = cameraManager.cameraIdList
         for (id in cameraIdList) {
             val characteristics = cameraManager.getCameraCharacteristics(id)
-            if (characteristics.get(CameraCharacteristics.LENS_FACING) == lensFacing) {
+            if (characteristics.get(CameraCharacteristics.LENS_FACING) == currentCameraLensFacing) {
                 cameraId = id
             }
         }
@@ -122,10 +118,10 @@ class ScanActivity2 : AppCompatActivity() {
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 ActivityCompat.requestPermissions(
-                    this, arrayOf(Manifest.permission.CAMERA),
+                    this,
+                    arrayOf(Manifest.permission.CAMERA),
                     REQUEST_CAMERA_PERMISSION
                 )
-
                 return
             }
             cameraManager.openCamera(cameraId, stateCallback, null)
@@ -134,18 +130,9 @@ class ScanActivity2 : AppCompatActivity() {
         }
     }
 
-
     private fun createCameraPreview() {
         val texture = textureView.surfaceTexture
         if (texture != null) {
-            val previewSize = chooseOptimalSize(
-                cameraManager.getCameraCharacteristics(cameraId)
-                    .get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
-                    ?.getOutputSizes(SurfaceTexture::class.java),
-                textureView.width,
-                textureView.height
-            )
-
             texture.setDefaultBufferSize(textureView.width, textureView.height)
         }
         val surface = Surface(texture)
@@ -167,7 +154,7 @@ class ScanActivity2 : AppCompatActivity() {
                             CameraMetadata.CONTROL_MODE_AUTO
                         )
 
-                        //updatePreview()
+                        updatePreview()
                     }
 
                     override fun onConfigureFailed(session: CameraCaptureSession) {}
@@ -176,10 +163,7 @@ class ScanActivity2 : AppCompatActivity() {
         } catch (e: CameraAccessException) {
             e.printStackTrace()
         }
-
     }
-
-
 
     private fun updatePreview() {
         captureRequestBuilder.set(
@@ -198,28 +182,10 @@ class ScanActivity2 : AppCompatActivity() {
             e.printStackTrace()
         }
     }
-    private fun chooseOptimalSize(
-        choices: Array<Size>?,
-        textureViewWidth: Int,
-        textureViewHeight: Int
-    ): Size {
-        val aspectRatio = textureViewHeight.toDouble() / textureViewWidth.toDouble()
-        var selectedSize: Size? = null
-        var minDelta = Double.MAX_VALUE
 
-        choices?.forEach { size ->
-            val delta = Math.abs((size.width.toDouble() / size.height.toDouble()) - aspectRatio)
-            if (delta < minDelta) {
-                selectedSize = size
-                minDelta = delta
-            }
-        }
-
-        return selectedSize ?: choices?.get(0) ?: Size(640, 480) // Fallback size
-    }
     private fun closeCamera() {
         if (cameraDevice != null) {
-            cameraDevice!!.close()
+            cameraDevice.close()
         }
     }
 
@@ -244,6 +210,18 @@ class ScanActivity2 : AppCompatActivity() {
         } else {
             textureView.surfaceTextureListener = surfaceTextureListener
         }
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CAMERA),
+                REQUEST_CAMERA_PERMISSION
+            )
+            return
+        }
     }
 
     override fun onPause() {
@@ -251,8 +229,6 @@ class ScanActivity2 : AppCompatActivity() {
         stopBackgroundThread()
         super.onPause()
     }
-
-
 
     private val surfaceTextureListener: TextureView.SurfaceTextureListener =
         object : TextureView.SurfaceTextureListener {
