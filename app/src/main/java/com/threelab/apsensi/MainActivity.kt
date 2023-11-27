@@ -140,8 +140,7 @@ class  MainActivity : AppCompatActivity() {
 
                 sharedpref.put(Constant.PREF_TOKEN, token)
 
-                startActivity(Intent(this@MainActivity, BerandaActivity::class.java))
-                finish()
+                getUser();
             },
             { error ->
                 val response = JSONObject(String(error.networkResponse?.data ?: ByteArray(0)))
