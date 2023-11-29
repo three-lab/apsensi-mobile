@@ -10,9 +10,10 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/gambar1"
-        android:id="@+id/img1"
-        />
+        android:src="@drawable/icon1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/img1"/>
     
     <ImageView
         android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
         android:layout_height="20dp"
         android:text="Email"
         android:textStyle="bold"
-        android:layout_marginTop="270dp"
+        android:layout_marginTop="282dp"
         android:layout_marginLeft="30dp"
         android:textColor="@color/black"/>
 
@@ -51,7 +52,7 @@
         android:id="@+id/edit_email"
         android:layout_width="match_parent"
         android:layout_height="57dp"
-        android:layout_marginTop="295dp"
+        android:layout_marginTop="310dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/button_shape2"
@@ -64,32 +65,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="460dp"
         android:width="306dp"
         android:backgroundTint="@color/primaryColor"
         android:background="@drawable/button_shape"
         android:text="Lanjut"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
-    <TextView
+    <Button
         android:id="@+id/backlogin"
         android:layout_width="200dp"
         android:layout_height="30dp"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="520dp"
         android:layout_marginLeft="100dp"
         android:text="Kembali ke login"
-        android:textSize="18dp"
+        android:textSize="15sp"
+        android:textAllCaps="false"
         android:textStyle="italic"
         android:textColor="@color/primaryColor"
+        android:background="@android:color/transparent"
         android:textAlignment="center"/>
 
     <ImageView
-        android:layout_width="135dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:src="@drawable/icon4"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="276dp"
-        android:layout_marginBottom="0dp"
-        android:src="@drawable/gambar4" />
+        android:layout_alignParentRight="true"
+        android:id="@+id/img4" />
 </RelativeLayout>

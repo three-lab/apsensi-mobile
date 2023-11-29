@@ -2,7 +2,6 @@ package com.threelab.apsensi
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -19,6 +18,8 @@ class ForgotActivity : AppCompatActivity() {
 
     private lateinit var sharedpref: PreferencesHelper
     private lateinit var requestQueue: RequestQueue
+    private var sentEmail: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot)
@@ -26,11 +27,15 @@ class ForgotActivity : AppCompatActivity() {
 
         val btnLanjut: Button = findViewById(R.id.btn_lanjut)
         val email: EditText = findViewById(R.id.edit_email)
+        val backlogin: Button = findViewById(R.id.backlogin)
 
         btnLanjut.setOnClickListener { view ->
             forgotPass(email.text.toString())
+        }
 
-            Log.d("code", sharedpref.getString(Constant.PREF_CODE).toString())
+        backlogin.setOnClickListener{
+            val intent = Intent(this@ForgotActivity, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -41,31 +46,41 @@ class ForgotActivity : AppCompatActivity() {
         requestQueue = Volley.newRequestQueue(this@ForgotActivity)
 
         if (sharedpref.getString(Constant.PREF_CODE)?.isNotEmpty() == true) {
-            if (getOtp()) {
-                startActivity(Intent(this, OtpActivity::class.java))
+            if (getOtp(sentEmail.toString())) {
+                startActivity(Intent(this, OtpActivity::class.java).apply {
+                    putExtra("email", sentEmail)
+                })
                 finish()
             }
         }
     }
 
-    fun getOtp(): Boolean{
-        val forgotUrl = Constant.API_ENDPOINT + "/forgotPass";
+    private fun getOtp(email: String): Boolean {
+        val otpUrl = Constant.API_ENDPOINT + "/forgot-pass"
 
-        val request = JsonObjectRequest(Request.Method.GET, forgotUrl, null,
+        val otpData = JSONObject().apply {
+            put("email", email)
+        }
+
+        val otpRequest = JsonObjectRequest(
+            Request.Method.POST, otpUrl, otpData,
             { response ->
-                Toast.makeText(getApplicationContext(), "Email telah terdaftar", Toast.LENGTH_SHORT).show()
+                // Handle response jika diperlukan
+                Toast.makeText(applicationContext, "OTP Sent Successfully", Toast.LENGTH_SHORT).show()
+                // Lakukan navigasi atau langkah selanjutnya setelah OTP dikirim
             },
             { error ->
-                //Toast.makeText(getApplicationContext(), "Email belum terdaftar", Toast.LENGTH_SHORT).show()
+                // Handle error, if needed
+                Toast.makeText(applicationContext, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
             })
+
         // Tambahkan permintaan ke antrian
-        requestQueue.add(request)
+        requestQueue.add(otpRequest)
 
         // Kembalikan nilai sesuai kebutuhan
         // Misalnya, Anda dapat mengembalikan true jika permintaan berhasil dijalankan, dan false sebaliknya.
         return true
     }
-
 
     private fun forgotPass(email: String) {
         val forgotUrl = Constant.API_ENDPOINT + "/forgotPass";
@@ -79,10 +94,11 @@ class ForgotActivity : AppCompatActivity() {
                 val meta = response.getJSONObject("meta")
                 val data = response.getJSONObject("data")
 
-                // Dapetin code
+                // Dapatkan kode
                 val code = meta.getInt("code")
 
                 sharedpref.put(Constant.PREF_CODE, code.toString())
+                sentEmail = email  // Simpan email untuk digunakan di OtpActivity
 
                 startActivity(
                     Intent(
@@ -100,5 +116,4 @@ class ForgotActivity : AppCompatActivity() {
         // Tambahkan permintaan ke antrian
         requestQueue.add(ForgotPasswordRequest)
     }
-
 }

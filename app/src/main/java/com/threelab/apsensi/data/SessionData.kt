@@ -21,9 +21,12 @@ data class Employee(
     val id: Int,
     val fullname: String,
     val birthdate: String,
+    val birthplace: String,
     val photos: EmployeePhotos,
     val username: String,
     val email: String,
+    val nik: String,
+    val address: String,
     val gender: String
 )
 

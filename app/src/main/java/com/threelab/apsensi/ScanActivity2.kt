@@ -1,7 +1,5 @@
 package com.threelab.apsensi
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
@@ -13,12 +11,14 @@ import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CameraMetadata
 import android.hardware.camera2.CaptureRequest
+import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.SparseIntArray
 import android.view.Surface
 import android.view.TextureView
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 
 class ScanActivity2 : AppCompatActivity() {
@@ -132,9 +132,14 @@ class ScanActivity2 : AppCompatActivity() {
 
     private fun createCameraPreview() {
         val texture = textureView.surfaceTexture
-        if (texture != null) {
-            texture.setDefaultBufferSize(textureView.width, textureView.height)
+        val characteristics = cameraManager.getCameraCharacteristics(cameraId)
+        val streamConfigurationMap = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+        val largestSize = streamConfigurationMap?.getOutputSizes(SurfaceTexture::class.java)?.maxByOrNull { it.width * it.height }
+        val aspectRatio = largestSize?.width?.toDouble()?.div(largestSize.height) ?: 0.0
+        texture?.run {
+            setDefaultBufferSize(textureView.width, (textureView.width / aspectRatio).toInt())
         }
+
         val surface = Surface(texture)
 
         try {
@@ -168,10 +173,10 @@ class ScanActivity2 : AppCompatActivity() {
     private fun updatePreview() {
         captureRequestBuilder.set(
             CaptureRequest.CONTROL_MODE,
-            CameraMetadata.CONTROL_MODE_AUTO
+            CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE
         )
         val rotation = windowManager.defaultDisplay.rotation
-        captureRequestBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation))
+        captureRequestBuilder.set(CaptureRequest.JPEG_QUALITY, 100)
         try {
             cameraCaptureSessions.setRepeatingRequest(
                 captureRequestBuilder.build(),
@@ -238,6 +243,7 @@ class ScanActivity2 : AppCompatActivity() {
                 height: Int
             ) {
                 openCamera()
+                setDefaultBufferSize()
             }
 
             override fun onSurfaceTextureSizeChanged(
@@ -255,6 +261,21 @@ class ScanActivity2 : AppCompatActivity() {
 
             override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
         }
+
+    private fun setDefaultBufferSize() {
+        val characteristics = cameraManager.getCameraCharacteristics(cameraId)
+        val streamConfigurationMap =
+            characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+        val largestSize =
+            streamConfigurationMap?.getOutputSizes(SurfaceTexture::class.java)
+                ?.maxByOrNull { it.width * it.height }
+        val aspectRatio = largestSize?.width?.toDouble()?.div(largestSize.height) ?: 0.0
+
+        val texture = textureView.surfaceTexture
+        texture?.run {
+            setDefaultBufferSize(textureView.width, (textureView.width / aspectRatio).toInt())
+        }
+    }
 
     private fun startBackgroundThread() {
         backgroundThread = HandlerThread("CameraBackground")

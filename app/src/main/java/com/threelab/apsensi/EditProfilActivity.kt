@@ -15,9 +15,8 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import java.io.ByteArrayOutputStream
 
+class EditProfilActivity: AppCompatActivity(), View.OnClickListener {
 
-const val PICK_IMAGE_REQUEST = 1
-class EditProfilActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profil)
@@ -26,39 +25,40 @@ class EditProfilActivity : AppCompatActivity(), View.OnClickListener {
         val simpanPerubahan_button: Button = findViewById(R.id.simpanPerubahan_button)
         simpanPerubahan_button.setOnClickListener(this)
 
-
     }
 
     override fun onClick(v: View?) {
-            if (v != null) {
-                when(v.id) {
-                    R.id.simpanPerubahan_button -> {
-                        // Ambil gambar dari ImageView
-                        val imageView: ImageView = findViewById(R.id.framefoto)
-                        val bitmap = (imageView.drawable as BitmapDrawable).bitmap
+        if (v != null) {
+            when(v.id) {
+                R.id.simpanPerubahan_button -> {
+                    // Ambil gambar dari ImageView
+                    val imageView: ImageView = findViewById(R.id.framefoto)
+                    val bitmap = (imageView.drawable as BitmapDrawable).bitmap
 
-                        // Panggil fungsi uploadImage
-                        uploadImage(bitmap)
+                    // Panggil fungsi uploadImage
+                    uploadImage(bitmap)
 
-                        // Pindah ke aktivitas ProfilActivity
-                        val pindahIntent = Intent(this, ProfilActivity::class.java)
-                        startActivity(pindahIntent)
-                    }
+                    // Pindah ke aktivitas ProfilActivity
+                    val pindahIntent = Intent(this, ProfilActivity::class.java)
+                    startActivity(pindahIntent)
                 }
             }
+        }
     }
     fun selectImage(view: View) {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"),
+            Companion.PICK_IMAGE_REQUEST
+        )
     }
 
     // Handle hasil pemilihan gambar
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+        if (requestCode == Companion.PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
             val uri = data.data
             val imageView: ImageView = findViewById(R.id.framefoto)
             imageView.setImageURI(uri)
@@ -99,8 +99,10 @@ class EditProfilActivity : AppCompatActivity(), View.OnClickListener {
         // Menambahkan request ke antrian Volley
         Volley.newRequestQueue(this).add(request)
     }
+
+    companion object {
+        const val PICK_IMAGE_REQUEST = 1
+    }
+
+
 }
-
-
-
-

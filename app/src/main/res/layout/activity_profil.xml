@@ -6,86 +6,234 @@
     android:layout_height="match_parent"
     tools:context=".ProfilActivity">
 
-    <ImageView
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/panah1"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="370dp"
-        android:id="@+id/panah1"
-        />
-    <TextView
+    <ImageButton
+        android:id="@+id/backlainnya"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Profil Saya"
-        android:textSize="18sp"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/bx_arrow_back"/>
+
+    <TextView
+        android:id="@+id/profil"
+        android:layout_width="220dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:text="Profil"
         android:textColor="@color/black"
-        android:layout_marginLeft="45dp"
-        android:layout_alignTop="@id/panah1"
-        />
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/framefoto"
         android:layout_width="138dp"
         android:layout_height="109dp"
-        android:layout_below="@+id/panah1"
+        android:layout_below="@+id/profil"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
         android:src="@drawable/foto_profil"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="AHMAD IRSYADUL IBAD"
+        android:text=""
         android:textSize="20dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/framefoto"
         android:gravity="center_horizontal"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/textnama"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ahmadirsyadulibad7@gmail.com"
+        android:text=""
         android:layout_centerHorizontal="true"
         android:layout_below="@id/textnama"
         android:gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:id="@+id/textemail"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+62 882 1726 1702"
-        android:layout_centerHorizontal="true"
+
+
+    <RelativeLayout
+        android:id="@+id/data"
+        android:layout_width="346dp"
+        android:layout_height="102dp"
         android:layout_below="@id/textemail"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="5dp"
-        android:id="@+id/textnohp"
-        />
-
-
-    <ImageView
-        android:layout_width="356dp"
-        android:layout_height="132dp"
-        android:layout_below="@id/textnohp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/button_shape"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="20dp"
+            android:text="NIK"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:id="@+id/NIK" />
+            <TextView
+                android:id="@+id/textNIK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="20dp"
+                android:textColor="@color/white"
+                android:text=""/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/NIK"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:text="Jabatan"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:id="@+id/jabatan"/>
+            <TextView
+                android:id="@+id/textJabatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textNIK"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:text="Guru"
+                android:textColor="@color/white"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/jabatan"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:text="Sekolah"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:id="@+id/sekolah"/>
+            <TextView
+                android:id="@+id/textSekolah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/textJabatan"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:text="SMK Trunojoyo Jember"
+                android:textColor="@color/white"/>
 
+    </RelativeLayout>
 
-        />
+    <RelativeLayout
+        android:id="@+id/dataProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/data"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
 
-        />
+        <TextView
+            android:id="@+id/nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="Nama Lengkap"
+            android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/nama_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_alignParentEnd="true"/>
+        <TextView
+            android:id="@+id/namaPanggil"
+            android:layout_below="@id/nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="Nama Panggilan"
+            android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/namaPanggil_text"
+                android:layout_below="@id/nama_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="12dp"
+                android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/tempatlahir"
+            android:layout_below="@id/namaPanggil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="Tempat Lahir"
+            android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tempatlahir_text"
+                android:layout_below="@id/namaPanggil_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text=""
+                android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/tanggal"
+            android:layout_below="@id/tempatlahir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="Tanggal Lahir"
+            android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tanggal_text"
+                android:layout_below="@id/tempatlahir_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text=""
+                android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/alamat"
+            android:layout_below="@id/tanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:inputType="text"
+            android:textSize="12sp"
+            android:text="Alamat"
+            android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/alamat_text"
+                android:layout_below="@id/alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text=""
+                android:layout_alignParentStart="true"/>
+
+    </RelativeLayout>
 
 
     <ImageButton
@@ -94,8 +242,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginLeft="350dp"
         android:background="@drawable/edit_2"
-        android:id="@+id/edit1"
-        />
+        android:id="@+id/editProfile"/>
 
 
 </RelativeLayout>
