@@ -92,7 +92,8 @@
             android:layout_height="40dp"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="15dp"
-            android:background="@drawable/ic_calendar_line"/>
+            android:background="@drawable/calendar"
+            android:backgroundTint="@color/black"/>
     </RelativeLayout>
 
     <RelativeLayout

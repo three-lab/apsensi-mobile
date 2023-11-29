@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.ImageFormat
 import android.graphics.SurfaceTexture
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCaptureSession
@@ -14,17 +13,12 @@ import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CameraMetadata
 import android.hardware.camera2.CaptureRequest
-import android.hardware.camera2.TotalCaptureResult
-import android.icu.util.Output
-import android.media.ImageReader
 import android.os.Handler
 import android.os.HandlerThread
-import android.util.Size
 import android.util.SparseIntArray
 import android.view.Surface
 import android.view.TextureView
 import android.widget.Button
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 
 class ScanActivity2 : AppCompatActivity() {
@@ -40,7 +34,6 @@ class ScanActivity2 : AppCompatActivity() {
     private lateinit var backgroundThread: HandlerThread
     private var cameraId: String = ""
     private var currentCameraLensFacing = CameraCharacteristics.LENS_FACING_BACK
-    private lateinit var imageReader: ImageReader
 
     companion object {
         private const val REQUEST_CAMERA_PERMISSION = 200
@@ -58,13 +51,7 @@ class ScanActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_scan2)
         supportActionBar?.hide()
 
-        val kirim: Button = findViewById(R.id.kirim)
-        kirim.setOnClickListener {
-            takePicture()
-        }
-
         textureView = findViewById(R.id.textureView)
-        textureView.surfaceTextureListener = surfaceTextureListener
         switchCameraButton = findViewById(R.id.switchCamera)
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
@@ -88,37 +75,6 @@ class ScanActivity2 : AppCompatActivity() {
         openCamera()
     }
 
-    private fun takePicture() {
-        if (cameraDevice == null) return
-
-        val captureCallback = object : CameraCaptureSession.CaptureCallback() {
-            override fun onCaptureCompleted(
-                session: CameraCaptureSession,
-                request: CaptureRequest,
-                result: TotalCaptureResult
-            ) {
-                super.onCaptureCompleted(session, request, result)
-                // Foto diambil, tambahkan logika yang sesuai
-            }
-        }
-
-        try {
-            val captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
-            captureBuilder.addTarget(imageReader.surface)
-
-            val rotation = windowManager.defaultDisplay.rotation
-            captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation))
-
-            val captureCallbackHandler = Handler(backgroundThread.looper)
-            cameraCaptureSessions.stopRepeating()
-            cameraCaptureSessions.capture(captureBuilder.build(), captureCallback, captureCallbackHandler)
-        } catch (e: CameraAccessException) {
-            e.printStackTrace()
-        }
-    }
-
-
-
     private fun switchCamera() {
         currentCameraLensFacing =
             if (currentCameraLensFacing == CameraCharacteristics.LENS_FACING_BACK) {
@@ -130,29 +86,11 @@ class ScanActivity2 : AppCompatActivity() {
         closeCamera()
         openCamera()
     }
-    private fun chooseOptimalSize(
-        choices: Array<Size>?,
-        textureViewWidth: Int,
-        textureViewHeight: Int
-    ): Size {
-        val minSize = Math.max(Math.min(textureViewWidth, textureViewHeight), Int.MIN_VALUE)
-        val desirableSize = choices?.filter {
-            it.width >= minSize && it.height >= minSize && it.width == it.height * textureViewWidth / textureViewHeight
-        }
-
-        return if (desirableSize?.isNotEmpty() == true) {
-            desirableSize.minByOrNull { it.width * it.height } ?: choices[0]
-        } else {
-            choices?.get(0) ?: throw IllegalArgumentException("No available choices")
-        }
-    }
-
 
     private fun openCamera() {
         val cameraIdList = cameraManager.cameraIdList
         for (id in cameraIdList) {
             val characteristics = cameraManager.getCameraCharacteristics(id)
-
             if (characteristics.get(CameraCharacteristics.LENS_FACING) == currentCameraLensFacing) {
                 cameraId = id
             }
@@ -162,20 +100,6 @@ class ScanActivity2 : AppCompatActivity() {
             override fun onOpened(camera: CameraDevice) {
                 cameraDevice = camera
                 createCameraPreview()
-                // Inisialisasi ImageReader
-                val previewSize = chooseOptimalSize(
-                    cameraManager.getCameraCharacteristics(cameraId).get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)?.getOutputSizes(SurfaceTexture::class.java),
-                    textureView.width,
-                    textureView.height
-                )
-                imageReader = ImageReader.newInstance(previewSize.width, previewSize.height, ImageFormat.JPEG,1)
-                imageReader.setOnImageAvailableListener(
-                    { reader ->
-
-                    },
-                    backgroundHandler
-                )
-
             }
 
             override fun onDisconnected(camera: CameraDevice) {
@@ -209,12 +133,6 @@ class ScanActivity2 : AppCompatActivity() {
     private fun createCameraPreview() {
         val texture = textureView.surfaceTexture
         if (texture != null) {
-            val previewSize = chooseOptimalSize(
-                cameraManager.getCameraCharacteristics(cameraId).get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)?.getOutputSizes(SurfaceTexture::class.java),
-                textureView.width,
-                textureView.height
-            )
-
             texture.setDefaultBufferSize(textureView.width, textureView.height)
         }
         val surface = Surface(texture)
@@ -270,7 +188,6 @@ class ScanActivity2 : AppCompatActivity() {
             cameraDevice.close()
         }
     }
-
 
     override fun onRequestPermissionsResult(
         requestCode: Int,

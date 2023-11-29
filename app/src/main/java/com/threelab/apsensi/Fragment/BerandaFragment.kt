@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import com.android.volley.RequestQueue
-import com.android.volley.toolbox.Volley
 import com.threelab.apsensi.CalendarActivity
 import com.threelab.apsensi.FaqActivty
 import com.threelab.apsensi.IzinActivity
@@ -39,7 +37,15 @@ class BerandaFragment : Fragment() {
         val izinCard: CardView = view.findViewById(R.id.izinCard)
         val namaAkun: TextView = view.findViewById(R.id.namaakun)
 
+        val nik: TextView = view.findViewById(R.id.nik)
+
+        // Menggunakan setText untuk mengatur teks pada TextView
+        SessionData.getEmployee()?.nik?.let {
+            nik.text = it.toString()
+        }
+
         namaAkun.text = SessionData.getEmployee()?.fullname
+
 
         // Now you can use kalenderCard and laporanCard as needed
 
@@ -80,7 +86,6 @@ class BerandaFragment : Fragment() {
             handler.postDelayed(this, updateInterval)
         }
     }
-
     private fun updateWaktu() {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
