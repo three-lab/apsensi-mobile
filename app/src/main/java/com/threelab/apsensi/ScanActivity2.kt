@@ -3,6 +3,7 @@ package com.threelab.apsensi
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.SurfaceTexture
@@ -13,12 +14,15 @@ import android.hardware.camera2.CameraDevice
 import android.hardware.camera2.CameraManager
 import android.hardware.camera2.CameraMetadata
 import android.hardware.camera2.CaptureRequest
+import android.hardware.camera2.TotalCaptureResult
+import android.media.ImageReader
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.SparseIntArray
 import android.view.Surface
 import android.view.TextureView
 import android.widget.Button
+import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 
 class ScanActivity2 : AppCompatActivity() {
@@ -32,6 +36,7 @@ class ScanActivity2 : AppCompatActivity() {
     private lateinit var cameraCaptureSessions: CameraCaptureSession
     private lateinit var backgroundHandler: Handler
     private lateinit var backgroundThread: HandlerThread
+    private lateinit var imageReader:ImageReader
     private var cameraId: String = ""
     private var currentCameraLensFacing = CameraCharacteristics.LENS_FACING_BACK
 
@@ -46,6 +51,7 @@ class ScanActivity2 : AppCompatActivity() {
             ORIENTATIONS.append(Surface.ROTATION_270, 360)
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan2)
@@ -57,6 +63,12 @@ class ScanActivity2 : AppCompatActivity() {
 
         switchCameraButton.setOnClickListener {
             switchCamera()
+        }
+
+        //tombol kirim yang digunakan untuk mengambil foto
+        val kirim : Button = findViewById(R.id.kirim)
+        kirim.setOnClickListener {
+            takePicture()
         }
 
         if (ActivityCompat.checkSelfPermission(
@@ -73,6 +85,40 @@ class ScanActivity2 : AppCompatActivity() {
         }
 
         openCamera()
+    }
+
+    private fun takePicture() {
+        if(cameraDevice == null) return
+        val captureCallback = object : CameraCaptureSession.CaptureCallback() {
+            override fun onCaptureCompleted(
+                session: CameraCaptureSession,
+                request: CaptureRequest,
+                result:TotalCaptureResult
+            ){
+                super.onCaptureCompleted(session, request, result)
+                //foto diambil, tambahkan logika yang sesuai
+            }
+
+        }
+        try {
+            val captureBuilder =
+                cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE)
+            captureBuilder.addTarget(imageReader.surface)
+
+            val rotation = windowManager.defaultDisplay.rotation
+            captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATIONS.get(rotation))
+
+            val captureCallbackHandler = Handler(backgroundThread.looper)
+            cameraCaptureSessions.stopRepeating()
+            cameraCaptureSessions.capture(
+                captureBuilder.build(),
+                captureCallback,
+                captureCallbackHandler
+            )
+        } catch (e: CameraAccessException) {
+            e.printStackTrace()
+        }
+
     }
 
     private fun switchCamera() {
