@@ -1,32 +1,24 @@
 package com.threelab.apsensi
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.SurfaceTexture
-import android.hardware.camera2.CameraAccessException
-import android.hardware.camera2.CameraCaptureSession
-import android.hardware.camera2.CameraCharacteristics
-import android.hardware.camera2.CameraDevice
-import android.hardware.camera2.CameraManager
-import android.hardware.camera2.CameraMetadata
-import android.hardware.camera2.CaptureRequest
-import android.hardware.camera2.TotalCaptureResult
+import android.hardware.camera2.*
 import android.media.ImageReader
+import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
+import android.util.Size
 import android.util.SparseIntArray
 import android.view.Surface
 import android.view.TextureView
 import android.widget.Button
-import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import kotlin.math.abs
 
 class ScanActivity2 : AppCompatActivity() {
-
 
     private lateinit var textureView: TextureView
     private lateinit var switchCameraButton: Button
@@ -36,7 +28,7 @@ class ScanActivity2 : AppCompatActivity() {
     private lateinit var cameraCaptureSessions: CameraCaptureSession
     private lateinit var backgroundHandler: Handler
     private lateinit var backgroundThread: HandlerThread
-    private lateinit var imageReader:ImageReader
+    private lateinit var imageReader: ImageReader
     private var cameraId: String = ""
     private var currentCameraLensFacing = CameraCharacteristics.LENS_FACING_BACK
 
@@ -61,15 +53,10 @@ class ScanActivity2 : AppCompatActivity() {
         switchCameraButton = findViewById(R.id.switchCamera)
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
 
-        switchCameraButton.setOnClickListener {
-            switchCamera()
-        }
+        switchCameraButton.setOnClickListener { switchCamera() }
 
-        //tombol kirim yang digunakan untuk mengambil foto
-        val kirim : Button = findViewById(R.id.kirim)
-        kirim.setOnClickListener {
-            takePicture()
-        }
+        val kirim: Button = findViewById(R.id.kirim)
+        kirim.setOnClickListener { takePicture() }
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -178,9 +165,7 @@ class ScanActivity2 : AppCompatActivity() {
 
     private fun createCameraPreview() {
         val texture = textureView.surfaceTexture
-        if (texture != null) {
-            texture.setDefaultBufferSize(textureView.width, textureView.height)
-        }
+        texture?.setDefaultBufferSize(textureView.width, textureView.height)
         val surface = Surface(texture)
 
         try {
@@ -284,6 +269,7 @@ class ScanActivity2 : AppCompatActivity() {
                 height: Int
             ) {
                 openCamera()
+                adjustAspectRatio(width, height)
             }
 
             override fun onSurfaceTextureSizeChanged(
@@ -293,6 +279,7 @@ class ScanActivity2 : AppCompatActivity() {
             ) {
                 closeCamera()
                 openCamera()
+                adjustAspectRatio(width, height)
             }
 
             override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
@@ -301,6 +288,49 @@ class ScanActivity2 : AppCompatActivity() {
 
             override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
         }
+
+    private fun adjustAspectRatio(textureViewWidth: Int, textureViewHeight: Int) {
+        val previewSize = getPreferredPreviewSize(cameraId, textureViewWidth, textureViewHeight)
+        if (previewSize != null) {
+            val newWidth: Int
+            val newHeight: Int
+            val previewAspectRatio = previewSize.width.toFloat() / previewSize.height.toFloat()
+
+            newWidth = textureViewWidth
+            newHeight = (textureViewWidth / previewAspectRatio).toInt()
+
+            val layoutParams = textureView.layoutParams
+            layoutParams.width = newWidth
+            layoutParams.height = newHeight
+            textureView.layoutParams = layoutParams
+        }
+    }
+
+    private fun getPreferredPreviewSize(cameraId: String, maxWidth: Int, maxHeight: Int): Size? {
+        val characteristics = cameraManager.getCameraCharacteristics(cameraId)
+        val map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)
+        val supportedSizes = map?.getOutputSizes(SurfaceTexture::class.java)
+
+        supportedSizes?.let {
+            val aspectRatio = maxWidth.toFloat() / maxHeight
+            var bestSize: Size? = null
+            var minDiff = Float.MAX_VALUE
+
+            for (size in supportedSizes) {
+                val previewAspectRatio = size.width.toFloat() / size.height
+                val diff = abs(aspectRatio - previewAspectRatio)
+
+                if (diff < minDiff) {
+                    bestSize = size
+                    minDiff = diff
+                }
+            }
+
+            return bestSize
+        }
+
+        return null
+    }
 
     private fun startBackgroundThread() {
         backgroundThread = HandlerThread("CameraBackground")
@@ -317,4 +347,3 @@ class ScanActivity2 : AppCompatActivity() {
         }
     }
 }
-
