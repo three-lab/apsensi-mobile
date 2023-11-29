@@ -3,14 +3,15 @@ package com.threelab.apsensi
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.graphics.Matrix
-import android.graphics.RectF
+import android.graphics.ImageFormat
 import android.graphics.SurfaceTexture
 import android.hardware.camera2.*
 import android.media.ImageReader
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
+import android.util.Log
+import android.util.Size
 import android.util.SparseIntArray
 import android.view.Surface
 import android.view.TextureView
@@ -20,17 +21,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.threelab.apsensi.Helper.Constant
+import com.threelab.apsensi.Helper.ImageUploader
+import com.threelab.apsensi.Helper.PreferencesHelper
 import java.nio.ByteBuffer
-import java.util.*
-import kotlin.math.max
 
 class ScanActivity2 : AppCompatActivity() {
 
     private lateinit var textureView: TextureView
     private lateinit var switchCameraButton: Button
+    private lateinit var kirimButton: Button
     private lateinit var cameraManager: CameraManager
     private lateinit var cameraDevice: CameraDevice
     private lateinit var captureRequestBuilder: CaptureRequest.Builder
@@ -38,9 +41,11 @@ class ScanActivity2 : AppCompatActivity() {
     private lateinit var backgroundHandler: Handler
     private lateinit var backgroundThread: HandlerThread
     private lateinit var imageReader: ImageReader
+    private lateinit var imageUploader: ImageUploader
+    private lateinit var sharedpref: PreferencesHelper
+
     private var cameraId: String = ""
     private var currentCameraLensFacing = CameraCharacteristics.LENS_FACING_BACK
-    private lateinit var requestQueue: RequestQueue
 
     companion object {
         private const val REQUEST_CAMERA_PERMISSION = 200
@@ -57,21 +62,19 @@ class ScanActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan2)
-        supportActionBar?.hide()
 
         textureView = findViewById(R.id.textureView)
         switchCameraButton = findViewById(R.id.switchCamera)
+        kirimButton = findViewById(R.id.kirim)
         cameraManager = getSystemService(Context.CAMERA_SERVICE) as CameraManager
-
-        requestQueue = Volley.newRequestQueue(this@ScanActivity2)
+        sharedpref = PreferencesHelper(this@ScanActivity2)
+        imageUploader = ImageUploader(this)
 
         switchCameraButton.setOnClickListener {
             switchCamera()
         }
 
-        // Tombol kirim yang digunakan untuk mengambil foto
-        val kirim: Button = findViewById(R.id.kirim)
-        kirim.setOnClickListener {
+        kirimButton.setOnClickListener {
             takePicture()
         }
 
@@ -88,63 +91,32 @@ class ScanActivity2 : AppCompatActivity() {
             return
         }
 
+        // Initialize ImageReader
+        val imageDimension = Size(640, 480) // Adjust the size as needed
+        imageReader = ImageReader.newInstance(
+            imageDimension.width,
+            imageDimension.height,
+            ImageFormat.JPEG,
+            1
+        )
+
         openCamera()
     }
 
-    private fun configureTransform(viewWidth: Int, viewHeight: Int) {
-        val rotation = windowManager.defaultDisplay.rotation
-        val matrix = Matrix()
-        val viewRect = RectF(0f, 0f, viewWidth.toFloat(), viewHeight.toFloat())
-        val centerX = viewRect.centerX()
-        val centerY = viewRect.centerY()
-
-        when (rotation) {
-            Surface.ROTATION_90, Surface.ROTATION_270 -> {
-                viewRect.offset(centerX - viewRect.centerX(), centerY - viewRect.centerY())
-                matrix.setRectToRect(
-                    viewRect,
-                    RectF(0f, 0f, viewHeight.toFloat(), viewWidth.toFloat()),
-                    Matrix.ScaleToFit.FILL
-                )
-                val scale = max(
-                    viewHeight.toFloat() / viewRect.width(),
-                    viewWidth.toFloat() / viewRect.height()
-                )
-                matrix.postScale(scale, scale, centerX, centerY)
-                matrix.postRotate((90 * (rotation - 2)).toFloat(), centerX, centerY)
+    private fun switchCamera() {
+        currentCameraLensFacing =
+            if (currentCameraLensFacing == CameraCharacteristics.LENS_FACING_BACK) {
+                CameraCharacteristics.LENS_FACING_FRONT
+            } else {
+                CameraCharacteristics.LENS_FACING_BACK
             }
-            Surface.ROTATION_180 -> matrix.postRotate(180f, centerX, centerY)
-        }
 
-        textureView.setTransform(matrix)
+        closeCamera()
+        openCamera()
     }
 
-    private val surfaceTextureListener: TextureView.SurfaceTextureListener =
-        object : TextureView.SurfaceTextureListener {
-            override fun onSurfaceTextureAvailable(surface: SurfaceTexture, width: Int, height: Int) {
-                configureTransform(width, height)
-                openCamera()
-            }
-
-            override fun onSurfaceTextureSizeChanged(surface: SurfaceTexture, width: Int, height: Int) {
-                configureTransform(width, height)
-                closeCamera()
-                openCamera()
-            }
-
-            override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
-                return false
-            }
-
-            override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
-        }
-
     private fun takePicture() {
-        // Check if cameraDevice is null or not properly initialized
-        if (cameraDevice == null || !::imageReader.isInitialized) {
-            Toast.makeText(this, "Error taking picture. Please try again.", Toast.LENGTH_SHORT).show()
-            return
-        }
+        if (cameraDevice == null) return
 
         val captureCallback = object : CameraCaptureSession.CaptureCallback() {
             override fun onCaptureCompleted(
@@ -154,11 +126,14 @@ class ScanActivity2 : AppCompatActivity() {
             ) {
                 super.onCaptureCompleted(session, request, result)
 
-                // Use the image data from the result
-                val image = result.get(CaptureResult.SENSOR_TIMESTAMP)
-                if (image != null) {
-                    sendImageToServer(image)
-                }
+                // Get the image data from the result
+                val image = result.get(CaptureResult.SENSOR_TIMESTAMP) as Long
+
+                // Convert the timestamp to a ByteArray
+                val imageData = convertTimestampToByteArray(image)
+
+                // Send the image data to the server
+                sendImageToServer(imageData)
             }
         }
 
@@ -182,48 +157,30 @@ class ScanActivity2 : AppCompatActivity() {
         }
     }
 
-    private fun sendImageToServer(imageTimestamp: Long) {
-        val imageData: ByteArray = convertTimestampToByteArray(imageTimestamp)
+    private fun sendImageToServer(imageData: ByteArray) {
+        val url = Constant.API_ENDPOINT + "/attendances/attempt"
+        val token = sharedpref.getString(Constant.PREF_TOKEN) ?: ""
 
-        val url = Constant.API_ENDPOINT + "/attendance/attempt"
-        val stringRequest = object : StringRequest(
-            Request.Method.POST,
+        imageUploader.uploadImage(
             url,
-            { response ->
-                // Handle the server response
-                Toast.makeText(this, "Image sent successfully", Toast.LENGTH_SHORT).show()
+            token,
+            imageData,
+            {response ->
+                Toast.makeText(this, response.toString(), Toast.LENGTH_LONG).show()
             },
             { error ->
-                // Handle errors
-                Toast.makeText(this, "Error sending image: ${error.message}", Toast.LENGTH_SHORT).show()
-            }) {
-            override fun getBodyContentType(): String {
-                return "application/octet-stream"
+                Toast.makeText(this, String(error.networkResponse.data), Toast.LENGTH_LONG).show()
             }
-
-            override fun getBody(): ByteArray {
-                return imageData
-            }
-        }
-
-        requestQueue.add(stringRequest)
+        )
     }
 
     private fun convertTimestampToByteArray(timestamp: Long): ByteArray {
-        return timestamp.toString().toByteArray()
-    }
-
-
-    private fun switchCamera() {
-        currentCameraLensFacing =
-            if (currentCameraLensFacing == CameraCharacteristics.LENS_FACING_BACK) {
-                CameraCharacteristics.LENS_FACING_FRONT
-            } else {
-                CameraCharacteristics.LENS_FACING_BACK
-            }
-
-        closeCamera()
-        openCamera()
+        // You need to implement the logic to convert the timestamp to a byte array
+        // This is just a placeholder; you should adapt it based on your needs
+        // For example, you might use ByteBuffer, convert to string, or use another encoding
+        val byteBuffer = ByteBuffer.allocate(java.lang.Long.BYTES)
+        byteBuffer.putLong(timestamp)
+        return byteBuffer.array()
     }
 
     private fun openCamera() {
@@ -282,7 +239,7 @@ class ScanActivity2 : AppCompatActivity() {
             captureRequestBuilder.addTarget(surface)
 
             cameraDevice.createCaptureSession(
-                listOf(surface),
+                listOf(surface, imageReader.surface),
                 object : CameraCaptureSession.StateCallback() {
                     override fun onConfigured(session: CameraCaptureSession) {
                         if (cameraDevice == null) return
@@ -335,8 +292,10 @@ class ScanActivity2 : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CAMERA_PERMISSION) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+            if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
                 finish()
+            } else {
+                openCamera()
             }
         }
     }
@@ -369,6 +328,32 @@ class ScanActivity2 : AppCompatActivity() {
         super.onPause()
     }
 
+    private val surfaceTextureListener: TextureView.SurfaceTextureListener =
+        object : TextureView.SurfaceTextureListener {
+            override fun onSurfaceTextureAvailable(
+                surface: SurfaceTexture,
+                width: Int,
+                height: Int
+            ) {
+                openCamera()
+            }
+
+            override fun onSurfaceTextureSizeChanged(
+                surface: SurfaceTexture,
+                width: Int,
+                height: Int
+            ) {
+                closeCamera()
+                openCamera()
+            }
+
+            override fun onSurfaceTextureDestroyed(surface: SurfaceTexture): Boolean {
+                return false
+            }
+
+            override fun onSurfaceTextureUpdated(surface: SurfaceTexture) {}
+        }
+
     private fun startBackgroundThread() {
         backgroundThread = HandlerThread("CameraBackground")
         backgroundThread.start()
@@ -384,5 +369,3 @@ class ScanActivity2 : AppCompatActivity() {
         }
     }
 }
-
-
