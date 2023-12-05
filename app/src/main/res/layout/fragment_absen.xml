@@ -49,6 +49,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"/>
 
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -60,12 +61,13 @@
         android:layout_marginTop="200dp">
 
         <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/list_item_presensi">
+            android:id="@+id/attendanceRecycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/list_item_presensi"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
         </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

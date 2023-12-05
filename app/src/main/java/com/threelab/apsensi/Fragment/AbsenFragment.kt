@@ -18,12 +18,20 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.Helper.ImageUploader
 import com.threelab.apsensi.Helper.PreferencesHelper
 import com.threelab.apsensi.R
+import com.threelab.apsensi.adapters.AttendanceAdapter
+import com.threelab.apsensi.data.AttendanceItem
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -35,11 +43,8 @@ class AbsenFragment  : Fragment() {
 
     private lateinit var requestQueue: RequestQueue
     private lateinit var photoText: TextView
+    private lateinit var attRecycle: RecyclerView
     private lateinit var sharedPref: PreferencesHelper
-    private lateinit var listItemPresensiAdapter: ListItemPresensi
-
-
-    public val daftarPresensi: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,20 +52,10 @@ class AbsenFragment  : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_absen, container, false)
-
         val cameraScan: Button = view.findViewById(R.id.cameraScan)
-        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        val listItemPresensiAdapter = ListItemPresensi()
-        recyclerView.adapter = listItemPresensiAdapter
-
-        listItemPresensiAdapter.daftarPresensi.addAll(listOf("item 1"))
-
-        listItemPresensiAdapter.notifyDataSetChanged()
 
         photoText = view.findViewById(R.id.photoText)
+        attRecycle = view.findViewById(R.id.attendanceRecycle)
         requestQueue = Volley.newRequestQueue(requireContext())
         sharedPref = PreferencesHelper(requireContext())
 
@@ -69,6 +64,7 @@ class AbsenFragment  : Fragment() {
         }
 
         initializedOpenCamera()
+        fillAttendanceLogs()
 
         return view
     }
@@ -79,6 +75,8 @@ class AbsenFragment  : Fragment() {
         val endpoint = Constant.API_ENDPOINT + "/attendances/attempt"
         val authToken = sharedPref.getString(Constant.PREF_TOKEN) ?: ""
 
+        Log.d("Anjay", endpoint)
+
 
         if (resultCode == Activity.RESULT_OK && requestCode == 200 && data != null) {
             urlImage = data.extras?.get("data") as Bitmap?
@@ -88,33 +86,13 @@ class AbsenFragment  : Fragment() {
                 authToken,
                 bitmapToByteArray(urlImage),
                 {response ->
-
+                    Log.d("Anjay", response.toString())
                 },
                 {error ->
-                    if (error.networkResponse != null && error.networkResponse.data != null) {
-                        Log.e("Error", String(error.networkResponse.data))
-                    } else {
-                        Log.e("Error", "Error response is null or doesn't contain data.")
-                    }
-
+                    Log.d("Anjay", String(error.networkResponse.data))
                 }
             )
         }
-    }
-
-    private fun saveBitmapToFile(bitmap: Bitmap?): File {
-        val file = File.createTempFile("temp_image", null, requireActivity().cacheDir)
-
-        try {
-            val outputStream = FileOutputStream(file)
-            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
-            outputStream.flush()
-            outputStream.close()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-
-        return file
     }
 
     fun bitmapToByteArray(bitmap: Bitmap?): ByteArray {
@@ -126,6 +104,34 @@ class AbsenFragment  : Fragment() {
     private fun capturePhoto() {
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, 200)
+    }
+
+    private fun fillAttendanceLogs() {
+        val attUrl = Constant.API_ENDPOINT + "/attendances/logs"
+        val headers = HashMap<String, String>()
+
+        headers["Authorization"] = sharedPref.getString(Constant.PREF_TOKEN).toString()
+
+        val request = object: JsonObjectRequest(Request.Method.GET, attUrl, null,
+            {response ->
+                val gson = Gson()
+                val attendanceType = object: TypeToken<List<AttendanceItem>>() {}.type
+                val attendanceItems: List<AttendanceItem> = gson.fromJson(
+                    response.getJSONArray("data").toString(),
+                    attendanceType
+                )
+
+                val adapter = AttendanceAdapter(attendanceItems)
+                attRecycle.adapter = adapter
+            }, {error ->
+                Log.d("Anjay", error.networkResponse.toString())
+            }) {
+            override fun getHeaders(): MutableMap<String, String> {
+                return headers
+            }
+        }
+
+        requestQueue.add(request)
     }
 
     private fun initializedOpenCamera() {
