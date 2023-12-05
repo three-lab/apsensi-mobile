@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +16,8 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 import com.threelab.apsensi.Helper.Constant
@@ -35,6 +36,10 @@ class AbsenFragment  : Fragment() {
     private lateinit var requestQueue: RequestQueue
     private lateinit var photoText: TextView
     private lateinit var sharedPref: PreferencesHelper
+    private lateinit var listItemPresensiAdapter: ListItemPresensi
+
+
+    public val daftarPresensi: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +49,17 @@ class AbsenFragment  : Fragment() {
         val view = inflater.inflate(R.layout.fragment_absen, container, false)
 
         val cameraScan: Button = view.findViewById(R.id.cameraScan)
+        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val listItemPresensiAdapter = ListItemPresensi()
+        recyclerView.adapter = listItemPresensiAdapter
+
+        listItemPresensiAdapter.daftarPresensi.addAll(listOf("item 1"))
+
+        listItemPresensiAdapter.notifyDataSetChanged()
+
         photoText = view.findViewById(R.id.photoText)
         requestQueue = Volley.newRequestQueue(requireContext())
         sharedPref = PreferencesHelper(requireContext())
@@ -75,7 +91,12 @@ class AbsenFragment  : Fragment() {
 
                 },
                 {error ->
-                    Log.e("Anjay", String(error.networkResponse.data))
+                    if (error.networkResponse != null && error.networkResponse.data != null) {
+                        Log.e("Error", String(error.networkResponse.data))
+                    } else {
+                        Log.e("Error", "Error response is null or doesn't contain data.")
+                    }
+
                 }
             )
         }

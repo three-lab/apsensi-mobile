@@ -39,6 +39,11 @@ class BerandaFragment : Fragment() {
 
         val nik: TextView = view.findViewById(R.id.nik)
 
+
+        //jadwal
+//        val jadwalFragment = JadwalFragment()
+
+
         // Menggunakan setText untuk mengatur teks pada TextView
         SessionData.getEmployee()?.nik?.let {
             nik.text = it.toString()

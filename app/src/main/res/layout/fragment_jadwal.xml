@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:id="@+id/jadwal">
+    android:id="@+id/jadwalSenin">
 
     <TextView
         android:layout_width="290dp"
@@ -20,31 +20,200 @@
 
 
     <RelativeLayout
+        android:id="@+id/schedulesViewSenin"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="170dp"
         android:layout_marginTop="120dp"
-        android:id="@+id/profilview">
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/button_shape">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/button_shape"/>
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/line" />
+
+       <TextView
+           android:id="@+id/daySenin"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginStart="35dp"
+           android:layout_marginTop="8dp"
+           android:text="Senin"
+           android:textSize="18sp"
+           android:textColor="@color/white"
+           android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/classroomSenin_schudule1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="40dp"
+            android:text="classroom1"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/subjectSenin_schedule1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_below="@+id/classroomSenin_schudule1"
+            android:text=""
+            android:textSize="11sp"
+            android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/startSenin_schedule1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="70dp"
+                android:text=""
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                android:layout_below="@id/classroomSenin_schudule1"/>
+            <TextView
+                android:id="@+id/icon1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/classroomSenin_schudule1"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="55dp"
+                android:text="~"
+                android:textSize="11sp"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/endSenin_schedule1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/classroomSenin_schudule1"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="30dp"
+                android:text=""
+                android:textSize="11sp"
+                android:textColor="@color/white"/>
+
+
+         <TextView
+            android:id="@+id/classroomSenin_schudule2"
+             android:layout_below="@+id/subjectSenin_schedule1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+             android:layout_marginTop="5dp"
+            android:text=""
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@id/subjectSenin_schedule2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_below="@+id/classroomSenin_schudule2"
+            android:text=""
+            android:textSize="11sp"
+            android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/startSenin_schedule2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="70dp"
+                android:text=""
+                android:textSize="11sp"
+                android:textColor="@color/white"
+                android:layout_below="@id/classroomSenin_schudule2"/>
+            <TextView
+                android:id="@+id/icon2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/classroomSenin_schudule2"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="55dp"
+                android:text="~"
+                android:textSize="11sp"
+                android:textColor="@color/white"/>
+            <TextView
+                android:id="@+id/endSenin_schedule2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/classroomSenin_schudule2"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="30dp"
+                android:text=""
+                android:textSize="11sp"
+                android:textColor="@color/white"/>
+
+
+        <TextView
+            android:id="@+id/classroomSenin_schudule3"
+            android:layout_below="@+id/subjectSenin_schedule2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="5dp"
+            android:text=""
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_below="@+id/classroomSenin_schudule3"
+            android:text=""
+            android:textSize="11sp"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/startSenin_schedule3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="70dp"
+            android:text=""
+            android:textSize="11sp"
+            android:textColor="@color/white"
+            android:layout_below="@id/classroomSenin_schudule3"/>
+        <TextView
+            android:id="@+id/icon3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/classroomSenin_schudule3"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="55dp"
+            android:text="~"
+            android:textSize="11sp"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/endSenin_schedule3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/classroomSenin_schudule3"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="30dp"
+            android:text=""
+            android:textSize="11sp"
+            android:textColor="@color/white"/>
 
     </RelativeLayout>
 
     <GridLayout
+        android:id="@+id/frame_container"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@+id/profilview"
+        android:layout_below="@+id/schedulesViewSenin"
         android:layout_marginTop="25dp"
         android:rowCount="3"
         android:columnCount="2">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/selasaCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -89,6 +258,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/rabuCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="0"
@@ -126,6 +296,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/kamisCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="1"
@@ -162,6 +333,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/jumatCard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="1"
