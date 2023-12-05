@@ -24,6 +24,7 @@ class  MainActivity : AppCompatActivity() {
     private lateinit var sharedpref: PreferencesHelper
     private lateinit var requestQueue: RequestQueue
     private lateinit var errorMessageTextView : TextView
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,7 @@ class  MainActivity : AppCompatActivity() {
         
         sharedpref = PreferencesHelper(this@MainActivity)
         requestQueue = Volley.newRequestQueue(this@MainActivity)
+        loadingDialog = LoadingDialog(this@MainActivity)
 
         val username: EditText = findViewById(R.id.input_username);
         val password: EditText = findViewById(R.id.input_password);
@@ -87,6 +89,7 @@ class  MainActivity : AppCompatActivity() {
 
     fun getUser(): Boolean {
         val loginUrl = Constant.API_ENDPOINT + "/user"
+        loadingDialog.showLoading()
 
         // Membuat HashMap untuk menyimpan header
         val headers = HashMap<String, String>()
@@ -96,13 +99,16 @@ class  MainActivity : AppCompatActivity() {
         val request = object : JsonObjectRequest(Request.Method.GET, loginUrl, null,
             { response ->
                 val employeeJson = response.getJSONObject("data").getJSONObject("user");
+
                 SessionData.saveEmployee(employeeJson.toString())
+                loadingDialog.hideLoading()
 
                 startActivity(Intent(this@MainActivity, BerandaActivity::class.java))
                 finish()
             },
             { error ->
                 sharedpref.delete(Constant.PREF_TOKEN)
+                loadingDialog.hideLoading()
             }) {
 
             override fun getHeaders(): MutableMap<String, String> {
@@ -122,6 +128,7 @@ class  MainActivity : AppCompatActivity() {
 
 
     private fun login(username: String, password: String) {
+        loadingDialog.showLoading()
         val loginUrl = Constant.API_ENDPOINT + "/login";
 
         val dataRequest = JSONObject();
@@ -145,6 +152,8 @@ class  MainActivity : AppCompatActivity() {
             { error ->
                 val response = JSONObject(String(error.networkResponse?.data ?: ByteArray(0)))
                 val errorMessage = response.getJSONObject("meta").getString("message")
+
+                loadingDialog.hideLoading()
 
                 when {
                     errorMessage.contains("username") && errorMessage.contains("password") -> {

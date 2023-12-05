@@ -49,12 +49,6 @@
         android:textColor="@color/black"
         android:textStyle="bold"/>
 
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="502dp"
@@ -70,6 +64,5 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
         </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
-    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>
