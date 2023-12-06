@@ -28,6 +28,7 @@ import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.Helper.ImageUploader
 import com.threelab.apsensi.Helper.PreferencesHelper
 import com.threelab.apsensi.LoadingDialog
+import com.threelab.apsensi.PresenceFailedActivity
 import com.threelab.apsensi.PresenceSuccess
 import com.threelab.apsensi.R
 import com.threelab.apsensi.adapters.AttendanceAdapter
@@ -116,7 +117,13 @@ class AbsenFragment  : Fragment() {
                     startActivity(intent)
                 },
                 {error ->
-                    Log.d("Anjay", String(error.networkResponse.data))
+                    val response = JSONObject(String(error.networkResponse?.data ?: ByteArray(0)))
+                    val message = response.getJSONObject("meta").getString("message")
+                    val intent = Intent(requireContext(), PresenceFailedActivity::class.java)
+
+                    intent.putExtra("message", message)
+                    loadingDialog.hideLoading()
+                    startActivity(intent)
                 }
             )
         }

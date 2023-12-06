@@ -45,7 +45,13 @@ class BerandaActivity : AppCompatActivity() {
                 else -> false
             }
         }
-        replaceFragment(BerandaFragment())
+
+        if (intent.getStringExtra("fragmentToLoad") == "absenFragment") {
+            bottomNavigationView.selectedItemId = R.id.absen
+            replaceFragment(AbsenFragment())
+        } else {
+            replaceFragment(BerandaFragment())
+        }
     }
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit()

@@ -80,6 +80,10 @@
             android:name=".PresenceSuccess"
             android:exported="false"
             android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".PresenceFailedActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
