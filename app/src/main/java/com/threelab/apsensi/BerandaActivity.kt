@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.threelab.apsensi.Fragment.AbsenFragment
 import com.threelab.apsensi.Fragment.BerandaFragment
+import com.threelab.apsensi.Fragment.JadwalFragment
 import com.threelab.apsensi.data.ProfilFragment
 
 class BerandaActivity : AppCompatActivity() {
@@ -33,7 +34,7 @@ class BerandaActivity : AppCompatActivity() {
                 }
 
                 R.id.jadwal -> {
-//                    replaceFragment(JadwalFragment())
+                    replaceFragment(JadwalFragment())
                     true
                 }
 
