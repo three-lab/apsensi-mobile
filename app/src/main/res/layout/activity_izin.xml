@@ -13,7 +13,8 @@
         android:layout_marginBottom="30dp"
         android:text="Pengajuan Izin"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:fontFamily="@font/poppins_semibold"
         android:textStyle="bold" />
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
             android:layout_height="20dp"
             android:text="Jenis Izin"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/poppins_semibold"/>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +57,7 @@
             android:layout_height="20dp"
             android:text="Deskripsi"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/poppins_semibold"/>
 
         <EditText
             android:id="@+id/deskripsiIzin"
@@ -77,12 +78,13 @@
             android:layout_height="20dp"
             android:text="Tanggal"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/poppins_medium" />
         <EditText
             android:id="@+id/ambilTanggal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_medium"
             android:hint="DD/MM/YYYY"/>
         <ImageButton
             android:id="@+id/pilihTanggal"
@@ -104,7 +106,8 @@
             android:layout_marginEnd="20dp"
             android:text="Lampirkan Bukti Pendukung"
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black" />
 
         <Button
             android:id="@+id/buttonChooseImage"
@@ -113,6 +116,7 @@
             android:layout_marginTop="10dp"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
+            android:fontFamily="@font/poppins_medium"
             android:text="Pilih File" />
 
         <ImageView
@@ -132,6 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="610dp"
         android:layout_centerHorizontal="true"
-        android:text="Kirim" />
+        android:text="Kirim"
+        android:fontFamily="@font/poppins_medium"/>
 
 </RelativeLayout>

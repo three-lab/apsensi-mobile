@@ -22,7 +22,7 @@
         android:text="Data Absen"
         android:textColor="@color/black"
         android:textSize="25sp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/poppins_bold"/>
 
     <Button
         android:layout_width="match_parent"
@@ -34,6 +34,7 @@
         android:paddingLeft="100dp"
         android:paddingRight="70dp"
         android:text="Scan Wajah"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:id="@+id/cameraScan"
@@ -76,6 +77,7 @@
         android:layout_marginTop="164dp"
         android:layout_marginStart="20dp"
         android:text="Log Presensi"
+        android:fontFamily="@font/poppins_medium"
         android:textSize="15sp"
         android:textColor="@color/black"
         android:textStyle="bold"/>

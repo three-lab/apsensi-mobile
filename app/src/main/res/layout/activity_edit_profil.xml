@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="Edit Profil Saya"
         android:textSize="20sp"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         android:layout_marginLeft="45dp"
         android:layout_marginTop="30dp" />
@@ -38,7 +39,7 @@
         android:onClick="selectImage"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:text="Lengkapi dan simpan perubahan data profil yang telah anda perbaiki."
         android:textColor="@color/black"
@@ -47,13 +48,15 @@
         android:gravity="center_horizontal"
         android:layout_marginTop="15dp"
         android:id="@+id/text"
+        android:textSize="12sp"
+        android:fontFamily="@font/poppins_regular"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:background="@drawable/button_shape"
         android:drawableLeft="@drawable/user"
-        android:hint="Nama Lengkap"
+        android:hint="   Nama Lengkap"
         android:paddingLeft="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp"
@@ -61,13 +64,14 @@
         android:backgroundTint="@color/white"
         android:layout_below="@+id/text"
         android:id="@+id/namaLengkap"
-        />
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins_medium"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:background="@drawable/button_shape"
-        android:hint="Nama Panggilan"
+        android:hint="   Nama Panggilan"
         android:paddingLeft="15dp"
         android:drawableLeft="@drawable/user"
         android:layout_marginTop="15dp"
@@ -76,13 +80,14 @@
         android:backgroundTint="@color/white"
         android:layout_below="@+id/namaLengkap"
         android:id="@+id/namaPanggilan"
-        />
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins_medium"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:background="@drawable/button_shape"
-        android:hint="Tempat Lahir"
+        android:hint=" Tempat Lahir"
         android:paddingLeft="15dp"
         android:drawableLeft="@drawable/calendar2"
         android:layout_marginTop="15dp"
@@ -91,13 +96,14 @@
         android:backgroundTint="@color/white"
         android:layout_below="@+id/namaPanggilan"
         android:id="@+id/tempatlahir"
-        />
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins_medium"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:background="@drawable/button_shape"
-        android:hint="Tanggal Lahir"
+        android:hint=" Tanggal Lahir"
         android:paddingLeft="15dp"
         android:drawableLeft="@drawable/calendar2"
         android:layout_marginTop="15dp"
@@ -106,14 +112,14 @@
         android:backgroundTint="@color/white"
         android:layout_below="@+id/tempatlahir"
         android:id="@+id/tanggalahir"
-
-        />
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins_medium"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="57dp"
         android:background="@drawable/button_shape"
-        android:hint="Alamat"
+        android:hint=" Alamat"
         android:paddingLeft="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="20dp"
@@ -122,7 +128,8 @@
         android:backgroundTint="@color/white"
         android:layout_below="@+id/tanggalahir"
         android:id="@+id/alamat"
-        />
+        android:textSize="13sp"
+        android:fontFamily="@font/poppins_medium"/>
     <Button
         android:id="@+id/simpanPerubahan_button"
         android:layout_width="wrap_content"
@@ -135,7 +142,8 @@
         android:text="Simpan Perubahan"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"/>
 
 
 

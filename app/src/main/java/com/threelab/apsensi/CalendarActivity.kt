@@ -26,7 +26,6 @@ class CalendarActivity : AppCompatActivity() {
 
         calendarView = findViewById(R.id.calendarView)
         backberanda = findViewById(R.id.backberanda)
-        textView = findViewById(R.id.libur)
 
         backberanda.setOnClickListener {
             if (supportFragmentManager.backStackEntryCount > 0) {

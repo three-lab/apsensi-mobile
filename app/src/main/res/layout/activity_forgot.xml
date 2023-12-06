@@ -30,7 +30,7 @@
         android:textColor="@color/black"
         android:textAlignment="center"
         android:textSize="20dp"
-        android:textStyle="bold" />
+        android:fontFamily="@font/poppins_semibold"/>
     <TextView
         android:layout_width="290dp"
         android:layout_height="40dp"
@@ -38,15 +38,16 @@
         android:layout_marginLeft="55dp"
         android:text="Jangan khawatir, kami akan mengirimkan petunjuk penyetelan ulang sandi kepada Anda."
         android:textAlignment="center"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_medium"/>
     <TextView
-        android:layout_width="70dp"
+        android:layout_width="150dp"
         android:layout_height="20dp"
         android:text="Username"
-        android:textStyle="bold"
         android:layout_marginTop="282dp"
         android:layout_marginLeft="30dp"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_semibold"/>
 
     <EditText
         android:id="@+id/input_username"
@@ -58,6 +59,8 @@
         android:background="@drawable/button_shape2"
         android:hint="Enter your username"
         android:drawablePadding="20dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="15sp"
         android:paddingLeft="20dp" />
 
     <Button
@@ -71,7 +74,8 @@
         android:background="@drawable/button_shape"
         android:text="Lanjut"
         android:textColor="@color/white"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"/>
 
     <Button
         android:id="@+id/backlogin"
@@ -81,6 +85,7 @@
         android:layout_marginLeft="100dp"
         android:text="Kembali ke login"
         android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"
         android:textAllCaps="false"
         android:textStyle="italic"
         android:textColor="@color/primaryColor"

@@ -15,12 +15,23 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginStart="5dp"
-        android:text="Presensi "
+        android:text="Presensi    "
+        android:fontFamily="@font/poppins_medium"
         android:textSize="15sp"
-        android:textStyle="bold"
         android:textColor="@color/black"
         android:padding="5dp"/>
+    <TextView
+        android:id="@+id/mapel"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="98dp"
+        android:text="PAI"
+        android:textSize="15sp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/black"
+        android:gravity="center_vertical"/>
     <View
+        android:id="@+id/garis"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="30dp"
@@ -29,11 +40,46 @@
         android:background="@color/black" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="25dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         android:id="@+id/tanggalAddAbsen"
         android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_regular"
         android:text="1"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/garis"
+        android:layout_marginTop="3dp"
+        android:layout_marginStart="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="50dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/jam"/>
+
+        <TextView
+            android:id="@+id/start"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="7dp"
+            android:text="09.00"
+            android:fontFamily="@font/poppins_regular"/>
+        <TextView
+            android:id="@+id/end"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="7dp"
+            android:text="10.00"
+            android:fontFamily="@font/poppins_regular"/>
+    </RelativeLayout>
 
 </RelativeLayout>
