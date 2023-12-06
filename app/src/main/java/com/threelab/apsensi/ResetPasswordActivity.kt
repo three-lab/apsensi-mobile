@@ -36,15 +36,18 @@ class ResetPasswordActivity : AppCompatActivity() {
             val intent = Intent(this@ResetPasswordActivity, MainActivity::class.java)
             startActivity(intent)
         }
+
         btn_reset.setOnClickListener{
 
             val password = EditFirst.text.toString()
             val confirm = EditTwo.text.toString()
+            val username = intent.getStringExtra("username") ?: ""
+            val otp = intent.getStringExtra("otp") ?: ""
 
             if (password.isNotEmpty() && confirm.isNotEmpty()) {
                 if (password == confirm) {
                     // Panggil fungsi ResetPassword dengan parameter yang sesuai
-                    ResetPassword("username", "otp", password, confirm)
+                    ResetPassword(username, otp, password, confirm)
                 } else {
                     Toast.makeText(this, "Password dan konfirmasi password tidak cocok", Toast.LENGTH_SHORT).show()
                 }
@@ -71,7 +74,7 @@ class ResetPasswordActivity : AppCompatActivity() {
         val forgotRequest = JsonObjectRequest(Request.Method.POST, forgotUrl, dataRequest,
 
             { response ->
-                val intent = Intent(this, ResetPasswordActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
 
                 intent.putExtra("username", username)
                 loadingDialog.hideLoading()

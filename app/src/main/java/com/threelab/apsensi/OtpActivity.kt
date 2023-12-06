@@ -60,8 +60,9 @@ class OtpActivity : AppCompatActivity() {
                 val intent = Intent(this, ResetPasswordActivity::class.java)
 
                 intent.putExtra("username", username)
-                loadingDialog.hideLoading()
+                intent.putExtra("code", otp)
 
+                loadingDialog.hideLoading()
                 startActivity(intent)
                 finish()
                 Toast.makeText(this, "Kode OTP Berhasil Diverifikasi", Toast.LENGTH_SHORT)
