@@ -32,9 +32,6 @@
             android:name=".EditProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".ScanActivity2"
-            android:exported="false" />
-        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -59,9 +56,6 @@
             android:name=".CalendarActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfilActivity"
-            android:exported="false" />
-        <activity
             android:name=".BerandaActivity"
             android:exported="false" />
         <activity
@@ -70,6 +64,29 @@
         <activity
             android:name=".ForgotActivity"
             android:exported="true" />
+        <activity
+            android:name=".Fragment.JadwalJumat"
+            android:exported="false"/>
+        <activity
+            android:name=".Fragment.JadwalKamis"
+            android:exported="false"/>
+        <activity
+            android:name=".Fragment.JadwalRabu"
+            android:exported="false"/>
+        <activity
+            android:name=".Fragment.JadwalSelasa"
+            android:exported="false"/>
+        <activity
+            android:name=".PresenceSuccess"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".PresenceFailedActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".OtpActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
     </application>
-
 </manifest>
