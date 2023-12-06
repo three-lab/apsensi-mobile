@@ -70,7 +70,8 @@ class OtpActivity : AppCompatActivity() {
             },
 
             { error ->
-
+                Toast.makeText(this,"Gagal memproses", Toast.LENGTH_SHORT).show()
+                loadingDialog.hideLoading()
             });
 
         requestQueue.add(forgotRequest)

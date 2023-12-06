@@ -62,6 +62,7 @@ class ResetPasswordActivity : AppCompatActivity() {
     }
 
     private fun ResetPassword(username: String, otp: String, password: String, confirm: String){
+        loadingDialog.showLoading()
 
         val forgotUrl = Constant.API_ENDPOINT + "/forgot-pass"
         val dataRequest = JSONObject();
@@ -84,7 +85,8 @@ class ResetPasswordActivity : AppCompatActivity() {
                 Toast.makeText(this, "Password berhasil diperbarui", Toast.LENGTH_SHORT).show()
             },
             { error ->
-                Log.e("Apsensi", String(error.networkResponse.data))
+                Toast.makeText(this,"Gagal memproses", Toast.LENGTH_SHORT).show()
+                loadingDialog.hideLoading()
             });
 
         requestQueue.add(forgotRequest)

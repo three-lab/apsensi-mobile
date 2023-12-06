@@ -64,7 +64,8 @@ class ForgotActivity : AppCompatActivity() {
                 finish()
             },
             { error ->
-                Log.e("Anjay", error.toString())
+                loadingDialog.hideLoading()
+                Toast.makeText(this,"Gagal memproses", Toast.LENGTH_SHORT).show()
             });
 
         requestQueue.add(forgotRequest)
