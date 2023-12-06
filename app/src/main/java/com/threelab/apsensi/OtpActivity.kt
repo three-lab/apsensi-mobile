@@ -25,6 +25,7 @@ class OtpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_otppass)
+        supportActionBar?.hide()
 
         editTextOtp = findViewById(R.id.edit_otp)
         requestQueue = Volley.newRequestQueue(this@OtpActivity)
@@ -54,10 +55,19 @@ class OtpActivity : AppCompatActivity() {
         dataRequest.put("code", otp)
 
         val forgotRequest = JsonObjectRequest(Request.Method.POST, forgotUrl, dataRequest,
+
             { response ->
+                val intent = Intent(this, ResetPasswordActivity::class.java)
+
+                intent.putExtra("username", username)
+                loadingDialog.hideLoading()
+
+                startActivity(intent)
+                finish()
                 Toast.makeText(this, "Kode OTP Berhasil Diverifikasi", Toast.LENGTH_SHORT)
                     .show()
             },
+
             { error ->
 
             });
