@@ -16,6 +16,7 @@ import com.android.volley.Response
 import com.android.volley.toolbox.ImageRequest
 import com.android.volley.toolbox.Volley
 import com.threelab.apsensi.EditProfilActivity
+import com.threelab.apsensi.ForgotActivity
 import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.Helper.PreferencesHelper
 import com.threelab.apsensi.MainActivity
@@ -44,6 +45,7 @@ class ProfilFragment : Fragment() {
         val email_pengguna: TextView = root.findViewById(R.id.email_pengguna)
         val fotoProfil: ImageView = root.findViewById(R.id.fotoProfil)
         val toprofil: ImageButton = root.findViewById(R.id.toprofil)
+        val gantiPass: Button = root.findViewById(R.id.gantipassword)
 
 
         //inisiasi data profil
@@ -67,6 +69,11 @@ class ProfilFragment : Fragment() {
             val intent = Intent(activity, EditProfilActivity::class.java)
             startActivity(intent)
         }
+        gantiPass.setOnClickListener{
+            val intent = Intent(activity, ForgotActivity::class.java)
+            startActivity(intent)
+        }
+
 
         // Inisialisasi requestQueue
         requestQueue = Volley.newRequestQueue(requireContext())

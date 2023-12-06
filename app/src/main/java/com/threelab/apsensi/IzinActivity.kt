@@ -32,7 +32,7 @@ class IzinActivity : AppCompatActivity() {
     private lateinit var pilihTanggal: ImageButton
     private lateinit var buttonChooseImage: Button
 
-    private val PICK_FILE_REQUEST = 2
+    private val PICK_FILE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,7 +54,7 @@ class IzinActivity : AppCompatActivity() {
             // Intent untuk memilih gambar atau file PDF dari penyimpanan
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "*/*"
-            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("image/*", "application/pdf"))
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, arrayOf( "application/pdf"))
             startActivityForResult(intent, PICK_FILE_REQUEST)
         }
 
@@ -106,19 +106,11 @@ class IzinActivity : AppCompatActivity() {
 
             // Cek tipe MIME untuk menentukan apakah itu gambar atau file PDF
             val mimeType = contentResolver.getType(fileUri)
-            if (mimeType?.startsWith("image/") == true) {
+            if (mimeType == "application/pdf") {
                 // Itu adalah gambar
                 val imageView: ImageView = findViewById(R.id.pdfIconImageView)
                 imageView.setImageURI(fileUri)
                 kirimDataKeAPI()
-            } else if (mimeType?.equals("application/pdf") == true) {
-
-                val pdfIconImageView: ImageView = findViewById(R.id.pdfIconImageView)
-
-                // Simpan URI file PDF untuk penggunaan nanti
-                val pdfFileUri: Uri = data.data!!
-                // Lakukan sesuatu dengan URI file PDF, seperti menyimpannya atau memprosesnya nanti
-                showToast("File PDF Terpilih: $pdfFileUri")
             } else {
                 // Tipe file tidak didukung
                 showToast("Tipe file tidak didukung")
