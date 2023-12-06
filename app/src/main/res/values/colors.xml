@@ -13,5 +13,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorHoliday">#FF0000</color>
-
+    <color name="dangerColor">#FF4854</color>
+    <color name="successColor">#508D69</color>
 </resources>

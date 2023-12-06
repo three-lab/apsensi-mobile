@@ -17,7 +17,7 @@
         android:icon="@drawable/jadwal"/>
 
     <item
-        android:id="@+id/lainnya"
-        android:title="Lainnya"
-        android:icon="@drawable/lainnya"/>
+        android:id="@+id/profil"
+        android:title="Profil"
+        android:icon="@drawable/user"/>
 </menu>

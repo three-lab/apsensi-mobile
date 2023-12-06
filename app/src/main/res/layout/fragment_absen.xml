@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:id="@+id/absen">
 
@@ -26,7 +27,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/button_shape"
+        android:background="@drawable/button_shape_primary"
         android:layout_marginTop="100dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -36,7 +37,38 @@
         android:textColor="@color/white"
         android:textSize="15sp"
         android:id="@+id/cameraScan"
-        android:drawableLeft="@drawable/camera"/>
+        android:drawableLeft="@drawable/camera"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button_shape_success"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="70dp"
+        android:text="Akhiri Presensi"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:id="@+id/endPresence"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/button_shape_primary"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="70dp"
+        android:text="Mulai Presensi"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:id="@+id/startPresence"
+        android:visibility="invisible"/>
 
     <TextView
         android:layout_width="190dp"
@@ -54,12 +86,13 @@
         android:layout_marginTop="200dp">
 
         <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:scrollbars="vertical"
-        tools:listitem="@layout/list_item_presensi">
+            android:id="@+id/attendanceRecycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/list_item_presensi"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
         </androidx.recyclerview.widget.RecyclerView>
     </RelativeLayout>
 

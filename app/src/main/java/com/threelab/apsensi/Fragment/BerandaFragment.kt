@@ -14,6 +14,7 @@ import com.threelab.apsensi.CalendarActivity
 import com.threelab.apsensi.FaqActivty
 import com.threelab.apsensi.IzinActivity
 import com.threelab.apsensi.LaporanActivity
+import com.threelab.apsensi.LoadingDialog
 import com.threelab.apsensi.R
 import com.threelab.apsensi.data.SessionData
 import java.util.Calendar
@@ -38,6 +39,11 @@ class BerandaFragment : Fragment() {
         val namaAkun: TextView = view.findViewById(R.id.namaakun)
 
         val nik: TextView = view.findViewById(R.id.nik)
+
+
+        //jadwal
+//        val jadwalFragment = JadwalFragment()
+
 
         // Menggunakan setText untuk mengatur teks pada TextView
         SessionData.getEmployee()?.nik?.let {

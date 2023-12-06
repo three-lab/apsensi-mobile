@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:id="@+id/jadwalRabu">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_shape2"
+        android:text="hari"
+        android:textColor="@color/primaryColor"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:id="@+id/hariRabu"/>
+
+    <RelativeLayout
+        android:id="@+id/jadwal1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/button_shape2"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+        <TextView
+            android:id="@+id/classroom1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="45dp"
+            android:text="kelas"/>
+
+        <TextView
+            android:id="@+id/subject1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:layout_marginStart="45dp"
+            android:text="Mapel"/>
+
+        <TextView
+            android:id="@+id/start1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="45dp"
+            android:text="Start"/>
+        <TextView
+            android:id="@+id/end1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="115dp"
+            android:text="end"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/jadwal2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="285dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/button_shape2"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+        <TextView
+            android:id="@+id/classroom2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="45dp"
+            android:text="kelas"/>
+
+        <TextView
+            android:id="@+id/subject2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:layout_marginStart="45dp"
+            android:text="Mapel"/>
+
+        <TextView
+            android:id="@+id/start2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="45dp"
+            android:text="Start"/>
+        <TextView
+            android:id="@+id/end2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="115dp"
+            android:text="end"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/jadwal3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="465dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/button_shape2"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"/>
+        <TextView
+            android:id="@+id/classroom3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="45dp"
+            android:text="kelas"/>
+
+        <TextView
+            android:id="@+id/subject3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:layout_marginStart="45dp"
+            android:text="Mapel"/>
+
+        <TextView
+            android:id="@+id/start3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="45dp"
+            android:text="Start"/>
+        <TextView
+            android:id="@+id/end3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="115dp"
+            android:text="end"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

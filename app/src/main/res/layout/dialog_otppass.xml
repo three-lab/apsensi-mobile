@@ -24,7 +24,7 @@
         android:layout_marginLeft="98dp"
         android:text="Verifikasi OTP"
         android:textAlignment="center"
-        android:textSize="20dp"
+        android:textSize="15sp"
         android:textStyle="bold" />
     <TextView
         android:layout_width="390dp"
@@ -34,12 +34,18 @@
         android:layout_marginEnd="20dp"
         android:text="Kami mengirimkan kode ke email"
         />
-
-
+    <TextView
+        android:id="@+id/emailmasuk"
+        android:layout_width="390dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="255dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="" />
     <EditText
         android:id="@+id/edit_otp"
         android:layout_width="match_parent"
-        android:layout_height="57dp"
+        android:layout_height="50dp"
         android:layout_marginTop="295dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -58,7 +64,7 @@
         android:background="@drawable/button_shape"
         android:text="Lanjut"
         android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/backlogin"

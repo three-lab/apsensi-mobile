@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
-    tools:context=".Fragment.BerandaFragment">
+    tools:context=".Fragment.BerandaFragment"
+    android:id="@+id/frame_container">
 
     <ImageView
         android:id="@+id/logo"

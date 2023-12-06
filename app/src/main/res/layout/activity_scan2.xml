@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,31 +11,38 @@
         android:layout_height="wrap_content"
         android:id="@+id/textImage"/>
 
-    <!-- TextureView untuk menampilkan tampilan kamera -->
     <TextureView
         android:id="@+id/textureView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true" />
+        android:layout_centerHorizontal="true" />
 
-    <!-- Tombol untuk beralih kamera -->
-    <Button
-        android:id="@+id/switchCamera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:text="Switch Camera" />
-
-    <!-- Tombol untuk mengambil foto -->
     <Button
         android:id="@+id/kirim"
-        android:layout_width="wrap_content"
+        android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="740dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:text="Kirim" />
+        android:background="@drawable/button_shape"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:text="kirim"
+        android:textColor="@color/white"
+        />
+
+    <Button
+        android:id="@+id/switchCamera"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="730dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/cameraswitch"
+        />
+
+
+
 
 </RelativeLayout>

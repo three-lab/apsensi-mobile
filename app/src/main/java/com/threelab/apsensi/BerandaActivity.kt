@@ -1,16 +1,14 @@
 package com.threelab.apsensi
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.threelab.apsensi.Fragment.AbsenFragment
 import com.threelab.apsensi.Fragment.BerandaFragment
 import com.threelab.apsensi.Fragment.JadwalFragment
-import com.threelab.apsensi.Fragment.LainnyaFragment
-import com.threelab.apsensi.data.Employee
-import com.threelab.apsensi.data.SessionData
+import com.threelab.apsensi.data.ProfilFragment
 
 class BerandaActivity : AppCompatActivity() {
 
@@ -40,14 +38,20 @@ class BerandaActivity : AppCompatActivity() {
                     true
                 }
 
-                R.id.lainnya -> {
-                    replaceFragment(LainnyaFragment())
+                R.id.profil -> {
+                    replaceFragment(ProfilFragment())
                     true
                 }
                 else -> false
             }
         }
-        replaceFragment(BerandaFragment())
+
+        if (intent.getStringExtra("fragmentToLoad") == "absenFragment") {
+            bottomNavigationView.selectedItemId = R.id.absen
+            replaceFragment(AbsenFragment())
+        } else {
+            replaceFragment(BerandaFragment())
+        }
     }
     private fun replaceFragment(fragment: Fragment){
         supportFragmentManager.beginTransaction().replace(R.id.frame_container, fragment).commit()

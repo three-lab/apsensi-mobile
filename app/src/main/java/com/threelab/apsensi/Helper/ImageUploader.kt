@@ -1,6 +1,7 @@
 package com.threelab.apsensi.Helper
 
 import android.content.Context
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.NetworkResponse
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -80,6 +81,12 @@ class ImageUploader(private val context: Context) {
                     return Response.success(parsed, HttpHeaderParser.parseCacheHeaders(response))
                 }
             }
+
+            stringRequest.setRetryPolicy(DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            ))
 
             requestQueue.add(stringRequest)
 
