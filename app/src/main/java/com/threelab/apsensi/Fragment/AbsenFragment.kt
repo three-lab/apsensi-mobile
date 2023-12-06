@@ -27,6 +27,8 @@ import com.google.gson.reflect.TypeToken
 import com.threelab.apsensi.Helper.Constant
 import com.threelab.apsensi.Helper.ImageUploader
 import com.threelab.apsensi.Helper.PreferencesHelper
+import com.threelab.apsensi.LoadingDialog
+import com.threelab.apsensi.PresenceSuccess
 import com.threelab.apsensi.R
 import com.threelab.apsensi.adapters.AttendanceAdapter
 import com.threelab.apsensi.data.AttendanceItem
@@ -39,12 +41,16 @@ import java.io.IOException
 
 class AbsenFragment  : Fragment() {
     private var urlImage: Bitmap? = null
-    private var photoFile: File? = null
 
     private lateinit var requestQueue: RequestQueue
     private lateinit var photoText: TextView
     private lateinit var attRecycle: RecyclerView
     private lateinit var sharedPref: PreferencesHelper
+    private lateinit var startPresenceBtn: Button
+    private lateinit var endPresenceBtn: Button
+    private lateinit var cameraScan: Button
+    private lateinit var reqHeaders: MutableMap<String, String>
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,19 +58,38 @@ class AbsenFragment  : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_absen, container, false)
-        val cameraScan: Button = view.findViewById(R.id.cameraScan)
 
+        loadingDialog = LoadingDialog(requireContext())
+        sharedPref = PreferencesHelper(requireContext())
+        cameraScan = view.findViewById(R.id.cameraScan)
+        startPresenceBtn = view.findViewById(R.id.startPresence)
+        endPresenceBtn = view.findViewById(R.id.endPresence)
         photoText = view.findViewById(R.id.photoText)
         attRecycle = view.findViewById(R.id.attendanceRecycle)
         requestQueue = Volley.newRequestQueue(requireContext())
-        sharedPref = PreferencesHelper(requireContext())
+        reqHeaders = HashMap<String, String>()
+
+        reqHeaders["Authorization"] = sharedPref.getString(Constant.PREF_TOKEN).toString()
 
         cameraScan.setOnClickListener {
             capturePhoto()
         }
 
+        startPresenceBtn.setOnClickListener {managePresence(
+            "/attendances/attempt",
+            null
+        )}
+
+        endPresenceBtn.setOnClickListener {managePresence(
+            "/attendances/finish-attempt",
+            "Berhasil mengakhiri presensi, selamat melanjutkan aktivitas anda"
+        )}
+
         initializedOpenCamera()
         fillAttendanceLogs()
+        manageButton()
+
+        loadingDialog.showLoading()
 
         return view
     }
@@ -75,18 +100,20 @@ class AbsenFragment  : Fragment() {
         val endpoint = Constant.API_ENDPOINT + "/attendances/attempt"
         val authToken = sharedPref.getString(Constant.PREF_TOKEN) ?: ""
 
-        Log.d("Anjay", endpoint)
-
 
         if (resultCode == Activity.RESULT_OK && requestCode == 200 && data != null) {
             urlImage = data.extras?.get("data") as Bitmap?
+            loadingDialog.showLoading()
 
             ImageUploader(requireContext()).uploadImage(
                 endpoint,
                 authToken,
                 bitmapToByteArray(urlImage),
                 {response ->
-                    Log.d("Anjay", response.toString())
+                    val intent = Intent(requireContext(), PresenceSuccess::class.java)
+
+                    loadingDialog.hideLoading()
+                    startActivity(intent)
                 },
                 {error ->
                     Log.d("Anjay", String(error.networkResponse.data))
@@ -108,9 +135,6 @@ class AbsenFragment  : Fragment() {
 
     private fun fillAttendanceLogs() {
         val attUrl = Constant.API_ENDPOINT + "/attendances/logs"
-        val headers = HashMap<String, String>()
-
-        headers["Authorization"] = sharedPref.getString(Constant.PREF_TOKEN).toString()
 
         val request = object: JsonObjectRequest(Request.Method.GET, attUrl, null,
             {response ->
@@ -127,7 +151,60 @@ class AbsenFragment  : Fragment() {
                 Log.d("Anjay", error.networkResponse.toString())
             }) {
             override fun getHeaders(): MutableMap<String, String> {
-                return headers
+                return reqHeaders
+            }
+        }
+
+        requestQueue.add(request)
+    }
+
+    private fun manageButton() {
+        val url = Constant.API_ENDPOINT + "/attendances/status"
+
+        val request = object: JsonObjectRequest(Request.Method.GET, url, null,
+            {response ->
+                val data = response.getJSONObject("data")
+                val isStarted: Boolean = data.getBoolean("started")
+                val isScanned: Boolean = data.getBoolean("scanned")
+                val canAttempt: Boolean = data.getBoolean("canAttempt")
+
+                if(isStarted) {
+                    endPresenceBtn.visibility = View.VISIBLE
+                } else if(isScanned) {
+                    startPresenceBtn.visibility = View.VISIBLE
+                    startPresenceBtn.isEnabled = canAttempt
+                } else {
+                    cameraScan.visibility = View.VISIBLE
+                    cameraScan.isEnabled = canAttempt
+                }
+
+                loadingDialog.hideLoading()
+            }, {error ->
+                Log.e("Anjay", error.networkResponse.toString())
+            }) {
+            override fun getHeaders(): MutableMap<String, String> {
+                return reqHeaders
+            }
+        }
+
+        requestQueue.add(request)
+    }
+
+    private fun managePresence(endpoint: String, message: String?) {
+        val url = Constant.API_ENDPOINT + endpoint
+        loadingDialog.showLoading()
+
+        val request = object: JsonObjectRequest(Request.Method.POST, url, null,
+            {response ->
+                val intent = Intent(requireContext(), PresenceSuccess::class.java)
+                intent.putExtra("message", message)
+
+                startActivity(intent)
+            }, {error ->
+                Log.e("Anjay", String(error.networkResponse.data))
+            }) {
+            override fun getHeaders(): MutableMap<String, String> {
+                return reqHeaders
             }
         }
 

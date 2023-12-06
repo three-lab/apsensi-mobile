@@ -32,9 +32,6 @@
             android:name=".EditProfilActivity"
             android:exported="false" />
         <activity
-            android:name=".ScanActivity2"
-            android:exported="false" />
-        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -79,6 +76,10 @@
         <activity
             android:name=".Fragment.JadwalSelasa"
             android:exported="false"/>
+        <activity
+            android:name=".PresenceSuccess"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>
