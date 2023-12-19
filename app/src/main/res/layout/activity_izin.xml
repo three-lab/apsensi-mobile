@@ -2,141 +2,195 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tabIzin">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon4"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:id="@+id/img4" />
+
     <TextView
-        android:layout_width="220dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
         android:text="Pengajuan Izin"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:fontFamily="@font/poppins_semibold"
-        android:textStyle="bold" />
-    <RelativeLayout
+        android:textSize="25sp"
+        android:fontFamily="@font/poppins_bold"
+        android:id="@+id/izinTitle"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="85dp"
+        android:layout_height="520dp"
+        android:orientation="vertical"
+        android:layout_below="@+id/izinTitle"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp">
 
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:text="Jenis Izin"
-            android:textSize="15sp"
-            android:fontFamily="@font/poppins_semibold"/>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:hint="@string/selected"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
-            <AutoCompleteTextView
-                android:id="@+id/auto_complete_txt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:text="Deskripsi"
-            android:textSize="15sp"
-            android:fontFamily="@font/poppins_semibold"/>
-
-        <EditText
-            android:id="@+id/deskripsiIzin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_marginTop="230dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:text="Tanggal"
-            android:textSize="15sp"
-            android:fontFamily="@font/poppins_medium" />
-        <EditText
-            android:id="@+id/ambilTanggal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_medium"
-            android:hint="DD/MM/YYYY"/>
-        <ImageButton
-            android:id="@+id/pilihTanggal"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/calendar2"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="330dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:text="Lampirkan Bukti Pendukung"
-            android:textSize="15sp"
-            android:fontFamily="@font/poppins_regular"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/buttonChooseImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:fontFamily="@font/poppins_medium"
-            android:text="Pilih File" />
+            android:text="Jenis Izin"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
 
-        <ImageView
-            android:id="@+id/pdfIconImageView"
+        <Spinner
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_below="@id/buttonChooseImage"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/izinSpinner"
+            android:background="@drawable/button_shape2"
+            android:theme="@style/SpinnerTheme"/>
 
-    </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginTop="10dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/button_shape2"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:gravity="top"
+            android:id="@+id/izinDeskripsi"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginEnd="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tanggal"
+                    android:textSize="15sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:background="@drawable/button_shape2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_medium"
+                        android:hint="dd/mm/YYYY"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:padding="10dp"
+                        android:id="@+id/izinCalendarText"/>
+
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/calendar2"
+                        android:id="@+id/izinCalendarBtn"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="2"
+                android:layout_marginStart="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lama Hari"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/button_shape2"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:inputType="number"
+                    android:id="@+id/izinDay"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Attachment"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:layout_marginTop="20dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.github.barteksc.pdfviewer.PDFView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/izinPdfViewer"
+                android:padding="10dp"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/button_shape5"
+                android:padding="20dp"
+                android:id="@+id/izinButtonContainer">
+
+                <ImageButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/icon_file_plus"
+                    android:id="@+id/izinButtonAttachment"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
 
     <Button
-        android:id="@+id/buttonKirim"
-        android:layout_width="wrap_content"
+        android:id="@+id/izinSend"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="610dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="Kirim"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shape"
         android:fontFamily="@font/poppins_medium"/>
-
 </RelativeLayout>

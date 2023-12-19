@@ -6,7 +6,6 @@
         <item name="colorOnPrimary">@color/background</item>
         <item name="colorOutline">@color/backgroundInt</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-
     </style>
 
 
