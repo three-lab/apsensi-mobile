@@ -25,6 +25,7 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.threelab.apsensi.Helper.Constant
+import com.threelab.apsensi.Helper.FileUploader
 import com.threelab.apsensi.Helper.ImageUploader
 import com.threelab.apsensi.Helper.PreferencesHelper
 import com.threelab.apsensi.LoadingDialog
@@ -106,10 +107,13 @@ class AbsenFragment  : Fragment() {
             urlImage = data.extras?.get("data") as Bitmap?
             loadingDialog.showLoading()
 
-            ImageUploader(requireContext()).uploadImage(
+            FileUploader(requireContext()).uploadFile(
                 endpoint,
                 authToken,
                 bitmapToByteArray(urlImage),
+                "image",
+                "image.jpg",
+                "image/jpeg",
                 {response ->
                     val intent = Intent(requireContext(), PresenceSuccess::class.java)
 
@@ -121,11 +125,34 @@ class AbsenFragment  : Fragment() {
                     val message = response.getJSONObject("meta").getString("message")
                     val intent = Intent(requireContext(), PresenceFailedActivity::class.java)
 
+                    Log.e("Presensi", String(error.networkResponse.data))
+
                     intent.putExtra("message", message)
                     loadingDialog.hideLoading()
                     startActivity(intent)
                 }
             )
+
+//            ImageUploader(requireContext()).uploadImage(
+//                endpoint,
+//                authToken,
+//                bitmapToByteArray(urlImage),
+//                {response ->
+//                    val intent = Intent(requireContext(), PresenceSuccess::class.java)
+//
+//                    loadingDialog.hideLoading()
+//                    startActivity(intent)
+//                },
+//                {error ->
+//                    val response = JSONObject(String(error.networkResponse?.data ?: ByteArray(0)))
+//                    val message = response.getJSONObject("meta").getString("message")
+//                    val intent = Intent(requireContext(), PresenceFailedActivity::class.java)
+//
+//                    intent.putExtra("message", message)
+//                    loadingDialog.hideLoading()
+//                    startActivity(intent)
+//                }
+//            )
         }
     }
 
