@@ -54,6 +54,7 @@ class IzinActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val arrayAdapter = ArrayAdapter(this@IzinActivity, android.R.layout.simple_spinner_dropdown_item, items)
+        excuseDate = Calendar.getInstance()
 
         calendarButton = findViewById(R.id.izinCalendarBtn)
         calendarText = findViewById(R.id.izinCalendarText)
@@ -68,9 +69,9 @@ class IzinActivity : AppCompatActivity() {
         sharedPref = PreferencesHelper(this)
 
         izinAttachment.setOnClickListener { pdfPickIntent() }
-        calendarButton.setOnClickListener { showDatePicker() }
-        calendarText.setOnClickListener { showDatePicker() }
         sendButton.setOnClickListener { validateInput() }
+
+        calendarText.text = getSelectedDate()
 
         izinSpinner.adapter = arrayAdapter
         izinSpinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
@@ -89,34 +90,9 @@ class IzinActivity : AppCompatActivity() {
         }
     }
 
-    private fun showDatePicker() {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(
-            this,
-            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                val selectedDate = Calendar.getInstance()
-                selectedDate.set(Calendar.YEAR, year)
-                selectedDate.set(Calendar.MONTH, monthOfYear)
-                selectedDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-                excuseDate = selectedDate
-                calendarText.text = getSelectedDate(selectedDate)
-            },
-            year,
-            month,
-            day
-        )
-
-        datePickerDialog.show()
-    }
-
-    private fun getSelectedDate(calendar: Calendar): String {
+    private fun getSelectedDate(): String {
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        return dateFormat.format(calendar.time)
+        return dateFormat.format(excuseDate?.time)
     }
 
     private fun showToast(message: String) {
