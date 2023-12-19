@@ -48,7 +48,7 @@ class OtpActivity : AppCompatActivity() {
     }
 
     private fun verifyOtp(username: String, otp: String) {
-        val forgotUrl = Constant.API_ENDPOINT + "/forgot-pass"
+        val forgotUrl = Constant.API_ENDPOINT + "/verify-code"
         val dataRequest = JSONObject();
 
         dataRequest.put("username", username)
@@ -59,8 +59,7 @@ class OtpActivity : AppCompatActivity() {
             { response ->
                 val intent = Intent(this, ResetPasswordActivity::class.java)
 
-                intent.putExtra("username", username)
-                intent.putExtra("code", otp)
+                intent.putExtra("data", arrayOf(username, otp))
 
                 loadingDialog.hideLoading()
                 startActivity(intent)
