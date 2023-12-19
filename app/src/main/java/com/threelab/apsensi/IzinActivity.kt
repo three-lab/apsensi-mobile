@@ -22,8 +22,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.barteksc.pdfviewer.PDFView
 import com.github.barteksc.pdfviewer.listener.OnRenderListener
 import com.threelab.apsensi.Helper.Constant
+import com.threelab.apsensi.Helper.FileHelper
 import com.threelab.apsensi.Helper.FileUploader
 import com.threelab.apsensi.Helper.PreferencesHelper
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -41,6 +43,7 @@ class IzinActivity : AppCompatActivity() {
     private lateinit var izinAttachment: ImageButton
     private lateinit var izinAttachmentContainer: RelativeLayout
     private lateinit var izinSpinner: Spinner
+    private lateinit var loadingDialog: LoadingDialog
     private lateinit var pdfViewer: PDFView
     private lateinit var sendButton: Button
     private lateinit var sharedPref: PreferencesHelper
@@ -59,6 +62,7 @@ class IzinActivity : AppCompatActivity() {
         izinAttachment = findViewById(R.id.izinButtonAttachment)
         izinAttachmentContainer = findViewById(R.id.izinButtonContainer)
         izinSpinner = findViewById(R.id.izinSpinner)
+        loadingDialog = LoadingDialog(this)
         pdfViewer = findViewById(R.id.izinPdfViewer)
         sendButton = findViewById(R.id.izinSend)
         sharedPref = PreferencesHelper(this)
@@ -128,8 +132,10 @@ class IzinActivity : AppCompatActivity() {
     }
 
     private fun sendExcuse() {
+        loadingDialog.showLoading()
+
         val endpoint = Constant.API_ENDPOINT + "/attendances/excuse"
-        val authToken = sharedPref.getString(Constant.PREF_TOKEN)
+        val authToken = sharedPref.getString(Constant.PREF_TOKEN) ?: ""
 
         val params = hashMapOf<String, String>(
             "day" to izinDay.text.toString(),
@@ -137,11 +143,30 @@ class IzinActivity : AppCompatActivity() {
             "description" to izinDescription.text.toString(),
         )
 
-//        FileUploader(this).uploadFileWithText(
-//            endpoint,
-//            authToken,
-//
-//        )
+        val file: ByteArray = pdfUri?.let { FileHelper().pdfToByteArray(this, it) }!!
+
+        FileUploader(this).uploadFileWithText(
+            endpoint,
+            authToken,
+            file,
+            "file",
+            "izin.pdf",
+            "application/pdf",
+            params,
+            { response ->
+                val intent = Intent(this, ExcuseSuccessActivity::class.java)
+
+                loadingDialog.hideLoading()
+                startActivity(intent)
+            },
+            { error ->
+                val response = JSONObject(String(error.networkResponse?.data ?: ByteArray(0)))
+                val message = response.getJSONObject("meta").getString("message")
+
+                loadingDialog.hideLoading()
+                showToast(message)
+            }
+        )
     }
 
     private fun validateInput() {

@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.threelab.apsensi.Helper.Constant
+import com.threelab.apsensi.Helper.FileHelper
 import com.threelab.apsensi.Helper.FileUploader
 import com.threelab.apsensi.Helper.PreferencesHelper
 import com.threelab.apsensi.LoadingDialog
@@ -89,12 +90,6 @@ class AbsenFragment  : Fragment() {
         loadingDialog.showLoading()
 
         return view
-    }
-
-    fun bitmapToByteArray(bitmap: Bitmap?): ByteArray {
-        val stream = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        return stream.toByteArray()
     }
 
     private fun capturePhoto() {
@@ -213,7 +208,7 @@ class AbsenFragment  : Fragment() {
                 FileUploader(requireContext()).uploadFile(
                     endpoint,
                     authToken,
-                    bitmapToByteArray(bitmap),
+                    FileHelper().bitmapToByteArray(bitmap),
                     "image",
                     "image.jpg",
                     "image/jpeg",

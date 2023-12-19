@@ -92,5 +92,9 @@
             android:name=".ResetPasswordActivity"
             android:exported="false"
             android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".ExcuseSuccessActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme"/>
     </application>
 </manifest>
