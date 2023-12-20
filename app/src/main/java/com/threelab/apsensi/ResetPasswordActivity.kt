@@ -41,8 +41,10 @@ class ResetPasswordActivity : AppCompatActivity() {
 
             val password = EditFirst.text.toString()
             val confirm = EditTwo.text.toString()
-            val username = intent.getStringExtra("username") ?: ""
-            val otp = intent.getStringExtra("otp") ?: ""
+            val data = intent.getStringArrayExtra("data")
+
+            val username = data?.get(0) ?: ""
+            val otp = data?.get(1) ?: ""
 
             if (password.isNotEmpty() && confirm.isNotEmpty()) {
                 if (password == confirm) {
@@ -64,7 +66,7 @@ class ResetPasswordActivity : AppCompatActivity() {
     private fun ResetPassword(username: String, otp: String, password: String, confirm: String){
         loadingDialog.showLoading()
 
-        val forgotUrl = Constant.API_ENDPOINT + "/forgot-pass"
+        val forgotUrl = Constant.API_ENDPOINT + "/reset-pass"
         val dataRequest = JSONObject();
 
         dataRequest.put("username", username)
@@ -72,12 +74,12 @@ class ResetPasswordActivity : AppCompatActivity() {
         dataRequest.put("password", password)
         dataRequest.put("password_confirm", confirm)
 
+        Log.d("Presensi", dataRequest.toString())
+
         val forgotRequest = JsonObjectRequest(Request.Method.POST, forgotUrl, dataRequest,
 
             { response ->
                 val intent = Intent(this, MainActivity::class.java)
-
-                intent.putExtra("username", username)
                 loadingDialog.hideLoading()
 
                 startActivity(intent)

@@ -24,6 +24,7 @@ class  MainActivity : AppCompatActivity() {
     private lateinit var sharedpref: PreferencesHelper
     private lateinit var requestQueue: RequestQueue
     private lateinit var errorMessageTextView : TextView
+    private lateinit var loadingDialog: LoadingDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +33,7 @@ class  MainActivity : AppCompatActivity() {
         
         sharedpref = PreferencesHelper(this@MainActivity)
         requestQueue = Volley.newRequestQueue(this@MainActivity)
+        loadingDialog = LoadingDialog(this)
 
         val username: EditText = findViewById(R.id.input_username);
         val password: EditText = findViewById(R.id.input_password);
@@ -86,13 +88,13 @@ class  MainActivity : AppCompatActivity() {
     }
 
     fun getUser(): Boolean {
-        val loginUrl = Constant.API_ENDPOINT + "/user"
+        loadingDialog.showLoading()
 
-        // Membuat HashMap untuk menyimpan header
+        val loginUrl = Constant.API_ENDPOINT + "/user"
         val headers = HashMap<String, String>()
+
         headers["Authorization"] = sharedpref.getString(Constant.PREF_TOKEN).toString() // Ganti dengan token akses yang sesuai
 
-        // Contoh menggunakan JsonObjectRequest (mungkin Anda perlu menyesuaikan dengan kebutuhan)
         val request = object : JsonObjectRequest(Request.Method.GET, loginUrl, null,
             { response ->
                 val employeeJson = response.getJSONObject("data").getJSONObject("user");
@@ -102,6 +104,7 @@ class  MainActivity : AppCompatActivity() {
                 finish()
             },
             { error ->
+                loadingDialog.hideLoading()
                 sharedpref.delete(Constant.PREF_TOKEN)
             }) {
 
@@ -110,21 +113,17 @@ class  MainActivity : AppCompatActivity() {
             }
         }
 
-        // Tambahkan permintaan ke antrian
         requestQueue.add(request)
 
-        // Kembalikan nilai sesuai kebutuhan
-        // Misalnya, Anda dapat mengembalikan true jika permintaan berhasil dijalankan, dan false sebaliknya.
         return true
     }
 
-
-
-
     private fun login(username: String, password: String) {
-        val loginUrl = Constant.API_ENDPOINT + "/login";
+        loadingDialog.showLoading()
 
+        val loginUrl = Constant.API_ENDPOINT + "/login";
         val dataRequest = JSONObject();
+
         dataRequest.put("username", username);
         dataRequest.put("password", password);
 
@@ -165,6 +164,7 @@ class  MainActivity : AppCompatActivity() {
                     }
                 }
 
+                loadingDialog.hideLoading()
                 Log.e("LoginError", error.toString())
             });
 

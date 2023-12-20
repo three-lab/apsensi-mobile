@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primaryColor">#7286D3</color>
+    <color name="secondaryColor">#D9DFFF</color>
     <color name="click">#D9DFFF</color>
     <color name="background">#FFFFFFFF</color>
     <color name="backgroundInt">#F6F6F6</color>

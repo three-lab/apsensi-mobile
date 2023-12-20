@@ -15,6 +15,7 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.ImageRequest
 import com.android.volley.toolbox.Volley
+import com.threelab.apsensi.ChangePasswordDialog
 import com.threelab.apsensi.EditProfilActivity
 import com.threelab.apsensi.ForgotActivity
 import com.threelab.apsensi.Helper.Constant
@@ -69,9 +70,9 @@ class ProfilFragment : Fragment() {
             val intent = Intent(activity, EditProfilActivity::class.java)
             startActivity(intent)
         }
+
         gantiPass.setOnClickListener{
-            val intent = Intent(activity, ForgotActivity::class.java)
-            startActivity(intent)
+            ChangePasswordDialog(requireContext()).show()
         }
 
 
