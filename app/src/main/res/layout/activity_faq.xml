@@ -13,25 +13,53 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:text="Bantuan"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/black"
         android:textSize="25sp"
+        android:id="@+id/textBantuan"
         android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputLayout
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/selected"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+
+        <AutoCompleteTextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:hint="@string/selected"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+            android:layout_height="wrap_content"
+            android:id="@+id/autocompletetextview"
+            android:inputType="none"/>
+        <Button
+            android:id="@+id/buttonBantuan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            />
 
-            <AutoCompleteTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/helpTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="160dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text=""
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins_regular"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"/>
 
-        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
 
 
 
