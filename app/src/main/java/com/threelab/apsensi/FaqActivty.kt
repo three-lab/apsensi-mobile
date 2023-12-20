@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 
 
+
 class FaqActivty: AppCompatActivity() {
 
 
